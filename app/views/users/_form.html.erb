@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.label :username %><br />
+    <%= f.text_field :username %>
   </div>
   <div class="field">
     <%= f.label :email %><br />
@@ -26,6 +26,14 @@
   <div class="field">
     <%= f.label :role %><br />
     <%= f.number_field :role %>
+  </div>
+  <div class="field">
+    <%= f.label :encrypted_password %><br />
+    <%= f.text_field :encrypted_password %>
+  </div>
+  <div class="field">
+    <%= f.label :salt %><br />
+    <%= f.text_field :salt %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,13 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
+  username: MyString
   email: MyString
   group_id: 1
   role: 1
+  encrypted_password: MyString
+  salt: MyString
 
 two:
-  name: MyString
+  username: MyString
   email: MyString
   group_id: 1
   role: 1
+  encrypted_password: MyString
+  salt: MyString
