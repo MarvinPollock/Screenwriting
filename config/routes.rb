@@ -1,4 +1,28 @@
 CoBook::Application.routes.draw do
+  resources :people
+
+
+  resources :ortes
+
+
+  resources :frames
+
+
+  resources :pads
+
+
+  resources :projects
+
+
+  resources :equipment
+
+
+  resources :groups
+
+
+  resources :users
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

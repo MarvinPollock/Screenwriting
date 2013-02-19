@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  env: MyString
+  descr: MyString
+  p_name: MyString
+  day: 2013-02-19 18:04:42
+  comment: MyString
+
+two:
+  name: MyString
+  env: MyString
+  descr: MyString
+  p_name: MyString
+  day: 2013-02-19 18:04:42
+  comment: MyString

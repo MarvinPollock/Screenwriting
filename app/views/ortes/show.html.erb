@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @orte.name %>
+</p>
+
+<p>
+  <b>Env:</b>
+  <%= @orte.env %>
+</p>
+
+<p>
+  <b>Descr:</b>
+  <%= @orte.descr %>
+</p>
+
+<p>
+  <b>P name:</b>
+  <%= @orte.p_name %>
+</p>
+
+<p>
+  <b>Day:</b>
+  <%= @orte.day %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%= @orte.comment %>
+</p>
+
+
+<%= link_to 'Edit', edit_orte_path(@orte) %> |
+<%= link_to 'Back', ortes_path %>

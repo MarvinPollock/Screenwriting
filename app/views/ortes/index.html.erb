@@ -1,0 +1,33 @@
+<h1>Listing ortes</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Env</th>
+    <th>Descr</th>
+    <th>P name</th>
+    <th>Day</th>
+    <th>Comment</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ortes.each do |orte| %>
+  <tr>
+    <td><%= orte.name %></td>
+    <td><%= orte.env %></td>
+    <td><%= orte.descr %></td>
+    <td><%= orte.p_name %></td>
+    <td><%= orte.day %></td>
+    <td><%= orte.comment %></td>
+    <td><%= link_to 'Show', orte %></td>
+    <td><%= link_to 'Edit', edit_orte_path(orte) %></td>
+    <td><%= link_to 'Destroy', orte, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Orte', new_orte_path %>

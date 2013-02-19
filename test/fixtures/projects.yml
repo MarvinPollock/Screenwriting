@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  group_id: MyString
+  created: 2013-02-19 17:59:03
+  changed: 2013-02-19 17:59:03
+
+two:
+  name: MyString
+  group_id: MyString
+  created: 2013-02-19 17:59:03
+  changed: 2013-02-19 17:59:03
