@@ -17,6 +17,8 @@
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home",    '/' %></li>
+          <li><%= link_to "Projects",    '/projects/' %></li>
+          <li><%= link_to "Users",    '/users/' %></li>
           <li><%= link_to "Help",    '#' %></li>
           <li><%= link_to "Sign in", '/users/sign_in' %></li>
         </ul>
@@ -26,12 +28,12 @@
 </header>
 <div class="container">
 
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-
   <%= yield %>
 
   <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 
 </div>
 </body>

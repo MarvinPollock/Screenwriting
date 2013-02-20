@@ -1,5 +1,36 @@
 <p id="notice"><%= notice %></p>
 
+<div class="row">
+  <div class="span12">
+    <center><%= @project.name %> | Gruppe <%= @project.group_id %></center>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12" style="border-style:solid;border-width:1px;height: 100px;">
+    Drehbuecher
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12" style="border-style:solid;border-width:1px;height: 100px;">
+    Storyboards
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12" style="border-style:solid;border-width:1px;">
+      Menueleiste
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span10" style="border-style:solid;border-width:1px;height: 400px;">
+      Body content
+    </div>
+    <div class="span2" style="border-style:solid;border-width:1px;height: 400px;">
+      Sidebar content
+    </div>
+  </div>
+</div>
+
 <p>
   <b>Name:</b>
   <%= @project.name %>
