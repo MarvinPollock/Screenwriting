@@ -4,6 +4,7 @@ gem 'rails', '3.2.12'
 gem 'ruby-openid'
 gem 'rack-openid'
 gem 'devise'
+gem "devise_openid_authenticatable"
 
 group :development do
   gem 'sqlite3', '1.3.5'

@@ -5,12 +5,16 @@ class SessionsController < ApplicationController
 
   end
 
+  def handle_unverified_request
+    true
+  end
+
   def new
     response.headers['WWW-Authenticate'] = Rack::OpenID.build_header(
-        :identifier => "https://www.google.com/accounts/o8/id",
-        :required => ["http://axschema.org/contact/email",
-                      "http://axschema.org/namePerson/first",
-                      "http://axschema.org/namePerson/last"],
+        :identifier => "http://openid.tzi.de/",
+        :required => ["http://openid.tzi.de/spec/schema/mail",
+                      "http://openid.tzi.de/spec/schema/givenName",
+                      "http://openid.tzi.de/spec/schema/surName"],
         :return_to => session_url,
         :method => 'POST')
     head 401
@@ -23,9 +27,9 @@ class SessionsController < ApplicationController
           ax = OpenID::AX::FetchResponse.from_success_response(openid)
           user = User.where(:identifier_url => openid.display_identifier).first
           user ||= User.create!(:identifier_url => openid.display_identifier,
-                                :email => ax.get_single('http://axschema.org/contact/email'),
-                                :first_name => ax.get_single('http://axschema.org/namePerson/first'),
-                                :last_name => ax.get_single('http://axschema.org/namePerson/last'))
+                                :email => ax.get_single('http://openid.tzi.de/spec/schema/mail'),
+                                :first_name => ax.get_single('http://openid.tzi.de/spec/schema/givenName'),
+                                :last_name => ax.get_single('http://openid.tzi.de/spec/schema/surName'))
           session[:user_id] = user.id
           if user.first_name.blank?
             redirect_to(user_additional_info_path(user))
