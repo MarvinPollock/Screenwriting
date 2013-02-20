@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130220135323) do
+ActiveRecord::Schema.define(:version => 20130220142858) do
 
   create_table "equipment", :force => true do |t|
     t.boolean  "status"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20130220135323) do
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
-    t.string   "lastname"
+    t.string   "last_name"
     t.string   "name"
     t.integer  "group_id"
     t.integer  "role"
