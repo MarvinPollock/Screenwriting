@@ -8,6 +8,8 @@ CoBook::Application.routes.draw do
 
   resources :users
 
+  resources :etherpad
+
 
   resources :people
 

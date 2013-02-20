@@ -31,6 +31,7 @@ class SessionsController < ApplicationController
                                 :first_name => ax.get_single('http://openid.tzi.de/spec/schema/givenName'),
                                 :last_name => ax.get_single('http://openid.tzi.de/spec/schema/surName'))
           session[:user_id] = user.id
+          session[:ep_sessions] = {}
           if user.first_name.blank?
             redirect_to(user_additional_info_path(user))
           else
