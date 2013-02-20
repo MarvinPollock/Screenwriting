@@ -1,4 +1,10 @@
 CoBook::Application.routes.draw do
+  devise_for :users
+
+
+
+  resource :session
+
   resources :users
 
 

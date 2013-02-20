@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
+gem 'ruby-openid'
+gem 'rack-openid'
+gem 'devise'
 
 group :development do
   gem 'sqlite3', '1.3.5'
