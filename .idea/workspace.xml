@@ -9,7 +9,7 @@
     <file path="/user.rb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361371718505" ignored="false" />
     <file path="/add_identifierUrl_to_users.rb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361362789782" ignored="false" />
     <file path="/sessions_controller.rb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361376159030" ignored="false" />
-    <file path="/show.html.erb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361387246957" ignored="false" />
+    <file path="/show.html.erb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361389273938" ignored="false" />
     <file path="/_form.html.erb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361379764735" ignored="false" />
     <file path="/routes.rb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361383807926" ignored="false" />
     <file path="/custom.css.scss" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361369012590" ignored="false" />
@@ -115,7 +115,7 @@
       <file leaf-file-name="show.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/projects/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="45" selection-start="1165" selection-end="1165" vertical-scroll-proportion="1.8956834">
+            <state line="31" column="17" selection-start="1004" selection-end="1004" vertical-scroll-proportion="0.28052804">
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
@@ -124,8 +124,25 @@
                 <element signature="n#style#0;n#div#3;n#div#0;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#4;n#div#0;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#5;n#div#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#iframe#0;n#div#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#center#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#center#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#3;n#center#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#4;n#center#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#5;n#center#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#iframe#0;n#div#0;n#div#0;n#div#4;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#5;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#5;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#0;n#div#5;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#3;n#div#0;n#div#5;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#4;n#div#0;n#div#5;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#5;n#div#0;n#div#5;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#5;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#div#5;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#1;n#div#5;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#3;n#div#1;n#div#5;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#4;n#div#1;n#div#5;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#5;n#div#1;n#div#5;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -800,7 +817,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/projects/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="45" selection-start="1165" selection-end="1165" vertical-scroll-proportion="1.8956834">
+        <state line="31" column="17" selection-start="1004" selection-end="1004" vertical-scroll-proportion="0.28052804">
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
@@ -809,8 +826,25 @@
             <element signature="n#style#0;n#div#3;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#4;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#5;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#iframe#0;n#div#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#center#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#center#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#center#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#4;n#center#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#5;n#center#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#iframe#0;n#div#0;n#div#0;n#div#4;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#0;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#4;n#div#0;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#5;n#div#0;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#1;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#4;n#div#1;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#5;n#div#1;n#div#5;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
