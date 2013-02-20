@@ -1,6 +1,6 @@
 CoBook::Application.routes.draw do
 
-  root :to => "users#show"
+  root :to => "users#index"
 
   devise_for :users
 
