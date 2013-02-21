@@ -4,9 +4,13 @@ gem 'rails', '3.2.12'
 gem 'ruby-openid'
 gem 'rack-openid'
 gem 'devise'
-gem "devise_openid_authenticatable"
+gem 'devise_openid_authenticatable'
 gem 'foreigner'
 gem 'etherpad-lite'
+gem "cucumber-rails", :group => :test, :require => false
+gem "capybara", :group => :test
+gem "database_cleaner", :group => :test
+gem "email_spec", :group => :test
 
 group :development do
   gem 'sqlite3', '1.3.5'
