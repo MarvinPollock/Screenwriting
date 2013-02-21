@@ -2,7 +2,7 @@ CoBook::Application.routes.draw do
 
   root :to => "users#index"
 
-  #devise_for :users
+  devise_for :users
 
   resource :session
 

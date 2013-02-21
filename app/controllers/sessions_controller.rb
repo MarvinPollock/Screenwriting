@@ -1,6 +1,10 @@
 class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
+  require 'rack/openid'
+
+  OpenID.fetcher.ca_file = 'config/ca-bundle.pem'
+
   def show
 
   end
@@ -11,14 +15,13 @@ class SessionsController < ApplicationController
 
   def new
     response.headers['WWW-Authenticate'] = Rack::OpenID.build_header(
-        :identifier => "http://openid.tzi.de/",
-        :required => ["http://openid.tzi.de/spec/schema/mail",
-                      "http://openid.tzi.de/spec/schema/givenName",
-                      "http://openid.tzi.de/spec/schema/surName"],
+        :identifier => 'http://openid.tzi.de/',
+        :required => ['http://openid.tzi.de/spec/schema/mail',
+                      'http://openid.tzi.de/spec/schema/givenName',
+                      'http://openid.tzi.de/spec/schema/surName'],
         :return_to => session_url,
         :method => 'POST')
-    head 401
-  end
+    head 401 end
 
   def create
     if openid = request.env[Rack::OpenID::RESPONSE]
