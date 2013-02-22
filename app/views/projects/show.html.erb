@@ -5,54 +5,19 @@
     <center><h1><%= @project.name %> | Gruppe <%= @project.group_id %></h1></center>
   </div>
 </div>
-<div class="row-fluid">
-  <div class="span12" style="border-style:solid;border-width:1px;height: 100px;">
-    <div class="span2" style="border-style:solid;border-width:1px;height: 100px;">
-      Szene 1
-    </div>
-    <div class="span2" style="border-style:solid;border-width:1px;height: 100px;">
-      Szene 2
-    </div>
-    <div class="span2" style="border-style:solid;border-width:1px;height: 100px;">
-      Szene 3
-    </div>
-    <div class="span2" style="border-style:solid;border-width:1px;height: 100px;">
-      Szene 4
-    </div>
-    <div class="span2" style="border-style:solid;border-width:1px;height: 100px;">
-      Szene 5
-    </div>
-    <div class="span2" style="border-style:solid;border-width:1px;height: 100px;">
-      Szene 6
-    </div>
-  </div>
+<div class="row-fluid" style="overflow: auto;">
+    <%= render 'scenario' %>
 </div>
 <div class="row">
   <div class="span12">
         <center>&darr;</center>
   </div>
 </div>
-<div class="row-fluid" style="background-color: white;position: relative">
-  <div class="span12" style="border-style:solid;border-width:1px;height: 100px;">
-    <center>
-      <div class="span1">
-      </div>
-      <div class="span2" style="border-style:solid;border-width:1px;height: 100px;">
-          Bild 1
-        </div>
-        <div class="span2" style="border-style:solid;border-width:1px;height: 100px;">
-          Bild 2
-        </div>
-        <div class="span2" style="border-style:solid;border-width:1px;height: 100px;">
-          Bild 3
-        </div>
-        <div class="span2" style="border-style:solid;border-width:1px;height: 100px;">
-          Bild 4
-        </div>
-        <div class="span2" style="border-style:solid;border-width:1px;height: 100px;">
-          Bild 5
-        </div>
-    </center>
+<div class="row-fluid" style="overflow: auto;">
+  <div class="slider" id="frames">
+    <div id="frame">
+
+    </div>
   </div>
 </div>
 <div class="container-fluid">
