@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_filter :ensure_signed_in
+  load_and_authorize_resource
   # GET /groups
   # GET /groups.json
   def index
