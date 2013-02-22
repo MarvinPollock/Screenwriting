@@ -1,24 +1,28 @@
 CoBook::Application.routes.draw do
 
-  root :to => "users#index"
-
-  devise_for :users
+  root :to => 'sessions#sign_in'
 
   resource :session
+
+  match 'session/destroy' => 'sessions#destroy'
+
+  match 'session/login' => 'sessions#login'
+
+  match 'login' => 'sessions#login'
+
+  match '/sessions/new' => 'sessions#new'
+
+  match 'session/sign_in' => 'sessions#sign_in'
 
   resources :users
 
   resources :etherpad
 
-
   resources :people
-
 
   resources :ortes
 
-
   resources :frames
-
 
   resources :pads
 
