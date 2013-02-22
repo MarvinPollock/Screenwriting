@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-    @pads = Pad.find_all_by_story(@project.name)
+    @pads = Pad.find_all_by_p_name(@project.name)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
