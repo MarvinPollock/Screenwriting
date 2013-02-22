@@ -28,14 +28,13 @@
   </div>
 </header>
 <div class="container">
+    
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 
   <%= yield %>
 
   <%= link_to "Sign out", '/session/destroy', :method => :delete %>
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-
 </div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 class PadsController < ApplicationController
   before_filter :ensure_signed_in
+  load_and_authorize_resource
   # GET /pads
   # GET /pads.json
   def index

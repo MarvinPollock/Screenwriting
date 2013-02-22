@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_filter :ensure_signed_in
+  load_and_authorize_resource
   # GET /users
   # GET /users.json
   def index
