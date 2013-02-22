@@ -9,8 +9,8 @@ module AuthenticationHelper
 
   def ensure_signed_in
     unless signed_in?
-      session[:redirect_to] = request.request_uri
-      redirect_to('session/sign_in')
+      session[:redirect_to] = request.fullpath
+      redirect_to('/session/sign_in')
     end
   end
 end

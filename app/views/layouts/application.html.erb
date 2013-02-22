@@ -21,7 +21,6 @@
           <li><%= link_to "Groups",    '/groups/' %></li>
           <li><%= link_to "Users",    '/users/' %></li>
           <li><%= link_to "Help",    '#' %></li>
-          <li><%= link_to "Sign in", '/users/sign_in' %></li>
         </ul>
       </nav>
     </div>
@@ -31,7 +30,7 @@
 
   <%= yield %>
 
-  <%= link_to "Sign out", 'session/destroy', :method => :delete %>
+  <%= link_to "Sign out", '/session/destroy', :method => :delete %>
 
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>

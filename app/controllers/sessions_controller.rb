@@ -2,7 +2,9 @@ class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def sign_in
-
+    if signed_in?
+      redirect_to('/users/')
+    end
   end
 
   def login

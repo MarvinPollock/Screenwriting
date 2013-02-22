@@ -1,4 +1,5 @@
 class FramesController < ApplicationController
+  before_filter :ensure_signed_in
   # GET /frames
   # GET /frames.json
   def index

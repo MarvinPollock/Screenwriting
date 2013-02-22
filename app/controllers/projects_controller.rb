@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_filter :ensure_signed_in
   # GET /projects
   # GET /projects.json
   def index

@@ -1,4 +1,5 @@
 class OrtesController < ApplicationController
+  before_filter :ensure_signed_in
   # GET /ortes
   # GET /ortes.json
   def index
