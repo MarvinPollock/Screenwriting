@@ -14,6 +14,8 @@ CoBook::Application.routes.draw do
 
   match 'login' => 'sessions#login'
 
+  match 'help' => 'help#index'
+
   match '/sessions/new' => 'sessions#new'
 
   match 'session/sign_in' => 'sessions#sign_in'
