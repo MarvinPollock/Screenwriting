@@ -21,3 +21,13 @@
   end
   @group.save
 end
+
+5.times do
+    name = Faker::Name
+    user = User.create!(
+      first_name: name.first_name,
+      last_name: name.last_name,
+      email: Faker::Internet.email,
+      identifier_url: 'openid.example.com/' + name.name.downcase.gsub(/\W/,'_'),
+      role: "student")
+end

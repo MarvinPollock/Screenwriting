@@ -1,8 +1,12 @@
 CoBookProjekt::Application.routes.draw do
 
-  resources :messages
-
   root :to => 'sessions#sign_in'
+
+  resources :messages
+  
+  match 'message/create' => 'messages#create'
+  
+  match 'message/response' => 'messages#response'
 
   resource :session
 

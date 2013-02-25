@@ -9,6 +9,7 @@
     <th>Identifier url</th>
     <th></th>
     <th></th>
+    <th></th>
     <!-- <th></th> -->
   </tr>
 
@@ -23,12 +24,21 @@
     </td>
     <td><%= user.role%></td>
     <td><%= user.identifier_url %></td>
+    <td>
+        <% if user.groups.empty?%>
+          <%unless user.equals(current_user)%>
+            <div><button onclick="hello()">Einladen</button></div> <!-- einladen(<%=current_user%>, <%=user%>) -->
+          <%end%>
+        <%end%>
+    </td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <!-- <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
   </tr>
 <% end %>
 </table>
+
+<div class="einladen"></div>
 
 <br />
 

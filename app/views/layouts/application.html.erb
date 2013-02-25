@@ -36,5 +36,30 @@
 
   <%= link_to "Sign out", '/session/destroy', :method => :delete %>
 </div>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+<script>
+    function hallo(){
+        alert('Hallo Welt !!!');
+    }
+    function hello(){
+        $(".einladen").html("CRAP !!!");
+    }
+    function einladen(){ // current, user
+        alert('kommt an');
+        $.ajax({
+            type: "POST",
+            url:  "/message/create",
+            data: { sender: "Ronald Smith", receiver: "", object: "Invitation" }, //sender: current.first_name, receiver: user.first_name, object: "Invitation" },
+            success: function(result){
+                if(result){
+                    alert('Success');
+                }else{
+                    alert('Failure');
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>
