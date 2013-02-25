@@ -41,7 +41,7 @@ class Ability
   end
   def define_project_access(user)
       can :manage, Project do |project|
-        if @group = Group.where(:group_id => project.group_id)
+        if @group = Group.find(:first, :conditions => [ "group_id = ?", project.group_id])
           @group.contains(user)
         end
       end
@@ -67,7 +67,7 @@ class Ability
     def define_pad_access(user)
       can :manage, Pad do |p|
         @project = Project.find_by_name(p.story)
-        if @group = Group.where(:group_id => @project.group_id)
+        if @group = Group.find(:first, :conditions => [ "group_id = ?", project.group_id])
           @group.contains(user)
         end
       end
