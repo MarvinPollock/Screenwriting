@@ -2,7 +2,7 @@
   <% @frames.each do |p| %>
           <% if params[:scene_id].to_s == p.p_name %>
               <div class="image-thumb">
-                <img src="<%= asset_path 'screenplay.gif' %>" />
+                <img src="<%= asset_path p.image %>" />
                 <p class="property-title"><%= p.p_name %></p>
               </div>
           <% end %>
