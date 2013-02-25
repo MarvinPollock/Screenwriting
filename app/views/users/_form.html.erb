@@ -20,8 +20,16 @@
     <%= f.text_field :last_name %>
   </div>
   <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :group_id %><br />
+    <%= f.number_field :group_id %>
+  </div>
+  <div class="field">
     <%= f.label :role %><br />
-    <%= f.text_field :role %>
+    <%= f.number_field :role %>
   </div>
   <div class="field">
     <%= f.label :identifier_url %><br />

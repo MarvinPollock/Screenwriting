@@ -14,13 +14,13 @@
 <% @groups.each do |group| %>
   <tr>
     <td><%= group.status %></td>
-    <td><%= group.num %></td>
+    <td><%= group.group_id %></td>
     <td><% (group.users).each { |user| %>
-        <%= link_to user.first_name, user %> &nbsp;
+        <%= link_to user.name, user %>
     <%} %></td>
     <td>
       <% (group.projects).each { |project| %>
-          <%= link_to project.name, project %> &nbsp;
+          <%= link_to project.name, project %>
       <%} %>
     </td>
     <td><%= link_to 'Show', group %></td>

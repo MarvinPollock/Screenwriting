@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Title</th>
+    <th>Story</th>
     <th>Content</th>
     <th></th>
     <th></th>
@@ -12,6 +13,7 @@
 <% @pads.each do |pad| %>
   <tr>
     <td><%= pad.title %></td>
+    <td><%= pad.story %></td>
     <td><%= pad.content %></td>
     <td><%= link_to 'Show', pad %></td>
     <td><%= link_to 'Edit', edit_pad_path(pad) %></td>

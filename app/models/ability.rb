@@ -40,8 +40,12 @@ class Ability
   def define_project_access(user)
       can :manage, Project do |project|
         if @group = project.group
-          @group.users(true).exists?(user)
+          @canManage = @group.users(true).exists?(user)
         end
+      end
+      unless @canManage
+        can [:new, :show, :create], Project
+
       end
     end
     
@@ -75,6 +79,10 @@ class Ability
             @group.users.exists?(user)
           end
         end
+      end
+      unless @canManage
+        can [:new, :show, :create], Pad
+
       end
     end
 end

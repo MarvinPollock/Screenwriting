@@ -4,6 +4,8 @@
   <tr>
     <th>Name</th>
     <th>Group</th>
+    <th>Created</th>
+    <th>Changed</th>
     <th></th>
     <th></th>
     <!-- <th></th> -->
@@ -12,7 +14,9 @@
 <% @projects.each do |project| %>
   <tr >
     <td><%= project.name %></td>
-    <td><%= link_to project.group.num, project.group %></td>
+    <td><%= link_to project.group_id, project.group %></td>
+    <td><%= project.created %></td>
+    <td><%= project.changed_date %></td>
     <td><%= link_to 'Show', project %></td>
     <td><%= link_to 'Edit', edit_project_path(project) %></td>
     <!-- <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->

@@ -1,8 +1,10 @@
 <div id="story" style="overflow: auto;display: inline">
   <% @frames.each do |p| %>
-      <div class="image-thumb">
-        <img src="<%= asset_path 'screenplay.gif' %>" />
-        <p class="property-title"><%= p.p_name %></p>
-      </div>
+          <% if params[:scene_id].to_s == p.p_name %>
+              <div class="image-thumb">
+                <img src="<%= asset_path 'screenplay.gif' %>" />
+                <p class="property-title"><%= p.p_name %></p>
+              </div>
+          <% end %>
   <% end %>
 </div>
