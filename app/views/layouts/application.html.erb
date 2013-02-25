@@ -45,18 +45,16 @@
     function hello(){
         $(".einladen").html("CRAP !!!");
     }
-    function einladen(){ // current, user
-        alert('kommt an');
+    function einladen(current, user){ // current, user
         $.ajax({
             type: "POST",
-            url:  "/message/create",
-            data: { sender: "Ronald Smith", receiver: "", object: "Invitation" }, //sender: current.first_name, receiver: user.first_name, object: "Invitation" },
+            url:  "http://localhost:3000/message/create",
+            data: { sender: current, receiver: user, object: "Invitation" },
             success: function(result){
-                if(result){
-                    alert('Success');
-                }else{
-                    alert('Failure');
-                }
+                alert(result);
+            },
+            error: function(xhr, status, err){
+                alert(err);
             }
         });
     }

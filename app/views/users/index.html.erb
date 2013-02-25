@@ -25,9 +25,9 @@
     <td><%= user.role%></td>
     <td><%= user.identifier_url %></td>
     <td>
-        <% if user.groups.empty?%>
-          <%unless user.equals(current_user)%>
-            <div><button onclick="hello()">Einladen</button></div> <!-- einladen(<%=current_user%>, <%=user%>) -->
+        <% unless current_user.groups.empty?%>
+          <%if !user.equals(current_user) && user.groups.empty?%>
+            <div><%=button_to "Einladen", "/message/create?sender=#{current_user.first_name}&receiver=#{user.first_name}&object='Invitation'", :remote => true, :id => 'einladung'%></div>
           <%end%>
         <%end%>
     </td>
@@ -37,8 +37,6 @@
   </tr>
 <% end %>
 </table>
-
-<div class="einladen"></div>
 
 <br />
 

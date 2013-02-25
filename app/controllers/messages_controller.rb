@@ -16,11 +16,23 @@ class MessagesController < ApplicationController
     @message.sender = sender
     @message.receiver = receiver
     @message.object = object
-    if object == "Invitation"
-      @message.content = "/message/response?sender=#{sender}&receiver=#{receiver}"
-      true
-    elsif
-      false
+    respond_to do |format|
+      if object == "Invitation"
+        @message.content = "/message/response?sender=#{sender}&receiver=#{receiver}"
+        if @message.save
+          format.html{}
+          format.json{}
+          format.js
+        elsif
+          format.html{}
+          format.json{}
+          format.js
+        end
+      elsif
+        format.html{}
+        format.json{}
+        format.js
+      end
     end
     
   end
@@ -39,7 +51,7 @@ class MessagesController < ApplicationController
     if sender.groups.empty?
       receiver = User.find(:first, :conditions => ["first_name=?", receiverName])
       if receiver.groups.size < 4
-        receiver.groups << sender
+        receiver.groups.first << sender
       else
         "Diese Gruppe ist schon voll. Suchen Sie sich eine andere Gruppe."
       end

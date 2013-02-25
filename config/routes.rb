@@ -6,7 +6,7 @@ CoBookProjekt::Application.routes.draw do
   
   match 'message/create' => 'messages#create'
   
-  match 'message/response' => 'messages#response'
+ 
 
   resource :session
 
