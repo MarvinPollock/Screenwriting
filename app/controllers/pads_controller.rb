@@ -5,7 +5,7 @@ class PadsController < ApplicationController
   # GET /pads.json
   def index
     @pads = Pad.all
-    @frames = Frame.find_all_by_pad
+    @frames = Frame.all
 
     respond_to do |format|
       format.html # index.html.erb

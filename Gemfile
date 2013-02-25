@@ -10,6 +10,7 @@ gem "capybara", :group => :test
 gem "database_cleaner", :group => :test
 gem "email_spec", :group => :test
 gem 'cancan'
+gem "paperclip"
 
 group :development do
   gem 'sqlite3', '1.3.5'
