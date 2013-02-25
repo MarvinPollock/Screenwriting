@@ -11,6 +11,7 @@ gem "database_cleaner", :group => :test
 gem "email_spec", :group => :test
 gem 'cancan'
 gem "faker", "~> 1.0", :group => [:test, :development]
+gem 'carrierwave'
 
 
 group :development do
@@ -36,6 +37,4 @@ gem 'binding_of_caller'
 group :production do
   gem 'mysql2'
 end
-
-gem 'therubyracer'
 
