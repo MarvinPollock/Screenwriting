@@ -18,7 +18,7 @@ class PadsControllerTest < ActionController::TestCase
 
   test "should create pad" do
     assert_difference('Pad.count') do
-      post :create, pad: { content: @pad.content, story: @pad.story, title: @pad.title }
+      post :create, pad: { content: @pad.content, title: @pad.title }
     end
 
     assert_redirected_to pad_path(assigns(:pad))
@@ -35,7 +35,7 @@ class PadsControllerTest < ActionController::TestCase
   end
 
   test "should update pad" do
-    put :update, id: @pad, pad: { content: @pad.content, story: @pad.story, title: @pad.title }
+    put :update, id: @pad, pad: { content: @pad.content, title: @pad.title }
     assert_redirected_to pad_path(assigns(:pad))
   end
 

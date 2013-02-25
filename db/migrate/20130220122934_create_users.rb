@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :lastname
       t.string :name
       t.integer :group_id
-      t.integer :role
+      t.string :role
       t.string :identifier_url
 
       t.timestamps

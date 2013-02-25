@@ -3,7 +3,7 @@ class CreatePads < ActiveRecord::Migration
     create_table :pads do |t|
       t.string :title
       t.string :story
-      t.string :content
+      t.text :content
 
       t.timestamps
     end

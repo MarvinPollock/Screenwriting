@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-CoBook::Application.load_tasks
+CoBookProjekt::Application.load_tasks

@@ -2,16 +2,12 @@
 
 one:
   first_name: MyString
-  lastname: MyString
-  name: MyString
-  group_id: 1
-  role: 1
-  identifier_url: MyString
+  last_name: MyString
+  email: MyString
+  role: MyString
 
 two:
   first_name: MyString
-  lastname: MyString
-  name: MyString
-  group_id: 1
-  role: 1
-  identifier_url: MyString
+  last_name: MyString
+  email: MyString
+  role: MyString

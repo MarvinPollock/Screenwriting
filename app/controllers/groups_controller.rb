@@ -43,14 +43,20 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(params[:group])
-
     respond_to do |format|
-      if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
-        format.json { render json: @group, status: :created, location: @group }
+      if g = Group.find(:first, :conditions => ["num = ?", params[:num]])
+        if @group.save
+          @group.users << current_user
+          format.html { redirect_to @group, notice: 'Group was successfully created.' }
+          format.json { render json: @group, status: :created, location: @group }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @group.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render action: "new" }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
+        flash[:notice] = "Die Gruppe mit der Nummer #{@group.num}  existiert bereits."
+        format.html { render action: "new"}
+        format.json { render json: @group.errors }
       end
     end
   end

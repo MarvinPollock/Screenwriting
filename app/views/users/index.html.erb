@@ -4,10 +4,10 @@
   <tr>
     <th>First name</th>
     <th>Lastname</th>
-    <th>Name</th>
     <th>Group</th>
     <th>Role</th>
     <th>Identifier url</th>
+    <th></th>
     <th></th>
     <th></th>
     <!-- <th></th> -->
@@ -15,18 +15,30 @@
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user.first_name %></td>
+    <td><%= link_to user.first_name, user %></td>
     <td><%= user.last_name %></td>
-    <td><%= link_to user.name, user %></td>
-    <td><%= link_to user.group_id, "/groups/#{user.group_id}" %></td>
-    <td><%= user.role %></td>
+    <td>
+        <% user.group_ids.each { |id| %>
+        <%= link_to id, "/groups/#{id}" %>
+        <%}%>
+    </td>
+    <td><%= user.role%></td>
     <td><%= user.identifier_url %></td>
+    <td>
+        <% if user.groups.empty?%>
+          <%unless user.equals(current_user)%>
+            <div><button onclick="hello()">Einladen</button></div> <!-- einladen(<%=current_user%>, <%=user%>) -->
+          <%end%>
+        <%end%>
+    </td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <!-- <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
   </tr>
 <% end %>
 </table>
+
+<div class="einladen"></div>
 
 <br />
 

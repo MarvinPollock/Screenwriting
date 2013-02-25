@@ -1,6 +1,5 @@
 class Project < ActiveRecord::Base
-  belongs_to :group
-  has_many :pads
-  has_many :frames
-  attr_accessible :changed_date, :created, :group_id, :name
+  attr_accessible :name, :group_id
+  belongs_to :group, :inverse_of => :projects
+  has_many :pads, :inverse_of => :project
 end

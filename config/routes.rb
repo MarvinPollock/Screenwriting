@@ -1,10 +1,12 @@
-CoBook::Application.routes.draw do
-
-  ActiveAdmin.routes(self)
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
+CoBookProjekt::Application.routes.draw do
 
   root :to => 'sessions#sign_in'
+
+  resources :messages
+  
+  match 'message/create' => 'messages#create'
+  
+  match 'message/response' => 'messages#response'
 
   resource :session
 
@@ -22,25 +24,13 @@ CoBook::Application.routes.draw do
 
   resources :users
 
-  resources :etherpad
-
-  resources :people
-
-  resources :ortes
-
   resources :frames
 
   resources :pads
 
-
   resources :projects
 
-
-  resources :equipment
-
-
   resources :groups
-
 
   resources :users
 

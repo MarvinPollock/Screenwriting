@@ -10,11 +10,13 @@ gem "capybara", :group => :test
 gem "database_cleaner", :group => :test
 gem "email_spec", :group => :test
 gem 'cancan'
-gem "paperclip"
+gem "faker", "~> 1.0", :group => [:test, :development]
+
 
 group :development do
-  gem 'sqlite3', '1.3.5'
+  gem 'mysql2'
   gem 'bootstrap-sass', '2.1'
+  gem 'better_errors'	
 end
 
 
@@ -29,8 +31,10 @@ end
 
 gem 'jquery-rails', '2.0.2'
 
+gem 'binding_of_caller'
+
 group :production do
-  gem 'pg', '0.12.2'
+  gem 'mysql2'
 end
 
 gem 'activeadmin'

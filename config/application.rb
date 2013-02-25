@@ -1,7 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
 require 'rack/openid'
+require 'rails/all'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -10,7 +10,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module CoBook
+module CoBookProjekt
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -57,12 +57,10 @@ module CoBook
     # Enable the asset pipeline
     config.assets.enabled = true
 
-    config.assets.initialize_on_precompile = false
-
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
     config.middleware.use 'Rack::OpenID'
-    #config.middleware.use "Rack::OpenID", OpenID::Store::Memory.new
+    #config.middlewre.use "Rack::OpenID", OpenID::Store::Memory.new
   end
 end

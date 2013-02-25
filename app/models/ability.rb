@@ -10,8 +10,6 @@ class Ability
       define_user_access(user)
       define_pad_access(user)
     end
-    
-    
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
@@ -41,20 +39,30 @@ class Ability
   end
   def define_project_access(user)
       can :manage, Project do |project|
-        if @group = Group.find(:first, :conditions => [ "group_id = ?", project.group_id])
-          @group.contains(user)
+        if @group = project.group
+          @canManage = @group.users(true).exists?(user)
         end
+      end
+      unless @canManage
+        can [:new, :show, :create], Project
+
       end
     end
     
     def define_group_access(user)
-      can :create, Group
-      can [:update, :read], Group do |group|
-        if @group
-          @group.contains(user)
-        else 
-          false
+      unless user.groups.empty?
+        can :manage, Group do |group|
+          @canManage = group.users.exists?(user)
         end
+        unless @canManage
+          can :new, Group
+          can :create, Group
+          can :index, Group
+        end
+      else
+        can :new, Group
+        can :create, Group
+        can :index, Group
       end
     end
     
@@ -66,10 +74,15 @@ class Ability
     
     def define_pad_access(user)
       can :manage, Pad do |p|
-        @project = Project.find_by_name(p.story)
-        if @group = Group.find(:first, :conditions => [ "group_id = ?", @project.group_id])
-          @group.contains(user)
+        if @project = p.project
+          if @group = @project.group
+            @group.users.exists?(user)
+          end
         end
+      end
+      unless @canManage
+        can [:new, :show, :create], Pad
+
       end
     end
 end

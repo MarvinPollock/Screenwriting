@@ -2,8 +2,8 @@
 
 one:
   status: MyString
-  group_id: 1
+  num: 1
 
 two:
   status: MyString
-  group_id: 1
+  num: 1

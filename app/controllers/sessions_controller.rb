@@ -31,7 +31,8 @@ class SessionsController < ApplicationController
           user ||= User.create!(:identifier_url => openid.display_identifier,
                                 :email => ax.get_single('http://openid.tzi.de/spec/schema/mail'),
                                 :first_name => ax.get_single('http://openid.tzi.de/spec/schema/givenName'),
-                                :last_name => ax.get_single('http://openid.tzi.de/spec/schema/surName'))
+                                :last_name => ax.get_single('http://openid.tzi.de/spec/schema/surName'),
+                                :role => "student")
           session[:user_id] = user.id
           if user.first_name.blank?
             redirect_to(user_additional_info_path(user))

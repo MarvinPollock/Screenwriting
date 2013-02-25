@@ -1,5 +1,5 @@
 class Pad < ActiveRecord::Base
-  belongs_to :project
-  has_many :frames
-  attr_accessible :content, :story, :title, :p_name, :pad_url
+  attr_accessible :content, :title, :story, :p_name, :pad_url
+  belongs_to :project, :inverse_of => :pads
+  has_many :frames, :inverse_of => :pad
 end

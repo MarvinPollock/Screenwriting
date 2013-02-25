@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130225115830) do
+ActiveRecord::Schema.define(:version => 20130322285951) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -56,17 +56,35 @@ ActiveRecord::Schema.define(:version => 20130225115830) do
   end
 
   create_table "frames", :force => true do |t|
-    t.string   "image"
+    t.string   "name"
+    t.binary   "image"
     t.string   "descr"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "pad_id"
     t.string   "pad"
     t.string   "p_name"
   end
 
+  add_index "frames", ["pad_id"], :name => "index_frames_on_pad_id"
+
   create_table "groups", :force => true do |t|
     t.string   "status"
-    t.integer  "group_id"
+    t.integer  "num"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "groups_users", :id => false, :force => true do |t|
+    t.integer "group_id"
+    t.integer "user_id"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.string   "sender"
+    t.string   "receiver"
+    t.string   "object"
+    t.string   "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -85,12 +103,15 @@ ActiveRecord::Schema.define(:version => 20130225115830) do
   create_table "pads", :force => true do |t|
     t.string   "title"
     t.string   "story"
-    t.string   "content"
+    t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "p_name"
+    t.integer  "project_id"
     t.string   "pad_url"
   end
+
+  add_index "pads", ["project_id"], :name => "index_pads_on_project_id"
 
   create_table "people", :force => true do |t|
     t.string   "name"
@@ -103,12 +124,14 @@ ActiveRecord::Schema.define(:version => 20130225115830) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.string   "group_id"
     t.datetime "created"
     t.datetime "changed_date"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "group_id"
   end
+
+  add_index "projects", ["group_id"], :name => "index_projects_on_group_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -125,11 +148,13 @@ ActiveRecord::Schema.define(:version => 20130225115830) do
     t.string   "last_name"
     t.string   "name"
     t.integer  "group_id"
-    t.integer  "role"
-    t.string   "identifier_url"
+    t.string   "role"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.string   "email"
+    t.string   "identifier_url"
   end
+
+  add_index "users", ["identifier_url"], :name => "index_users_on_identifier_url", :unique => true
 
 end

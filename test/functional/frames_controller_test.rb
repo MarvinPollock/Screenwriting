@@ -18,7 +18,7 @@ class FramesControllerTest < ActionController::TestCase
 
   test "should create frame" do
     assert_difference('Frame.count') do
-      post :create, frame: { descr: @frame.descr, image: @frame.image }
+      post :create, frame: { descr: @frame.descr, image: @frame.image, name: @frame.name }
     end
 
     assert_redirected_to frame_path(assigns(:frame))
@@ -35,7 +35,7 @@ class FramesControllerTest < ActionController::TestCase
   end
 
   test "should update frame" do
-    put :update, id: @frame, frame: { descr: @frame.descr, image: @frame.image }
+    put :update, id: @frame, frame: { descr: @frame.descr, image: @frame.image, name: @frame.name }
     assert_redirected_to frame_path(assigns(:frame))
   end
 

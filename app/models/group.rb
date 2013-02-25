@@ -1,13 +1,9 @@
 class Group < ActiveRecord::Base
-  has_many :users
-  has_many :projects
-  attr_accessible :group_id, :status
+  attr_accessible :num, :status, :user_ids, :id
+  has_many :projects, :inverse_of => :group
+  has_and_belongs_to_many :users
   
-  def contains(user)
-    present = false
-    users.each{ |i|
-      present = user.equals(i)
-    }
-    present
+  def equals(group)
+    self.id == group.id
   end
 end

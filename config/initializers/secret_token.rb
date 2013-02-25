@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-CoBook::Application.config.secret_token = '6bb753126c380539f57b7114f70e284cef7b7c1255c576c159a960591341b38c756cada4bf39a6291b9ea61d5add0d1721c4eb6e481ed73bee507541e4e63525'
+CoBookProjekt::Application.config.secret_token = '5e67a5d5b8118e7b3154e35a7167ac8507c33f158840c723a4ed23a57c14db57f55cace2532d93f20ea5beb51699bbfb3bf350e14824fedde2914996d9001f18'
