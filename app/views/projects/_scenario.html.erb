@@ -1,0 +1,8 @@
+<div id="scenario" style="overflow: auto;display: inline">
+  <% @pads.each do |p| %>
+      <div class="image-thumb">
+        <img src="<%= asset_path 'screenplay.gif' %>" />
+        <p class="property-title"><%= p.story %></p>
+      </div>
+  <% end %>
+</div>

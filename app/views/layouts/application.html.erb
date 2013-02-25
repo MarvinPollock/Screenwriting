@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CoBook</title>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <link rel="icon" href="<%= asset_path 'favicon.ico' %>" type="image/x-icon">
+  <%= csrf_meta_tags %>
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "sample app", '#', id: "logo" %>
+      <nav>
+        <ul class="nav pull-right">
+          <li><%= link_to "Home",    '/' %></li>
+          <li><%= link_to "Projects",    '/projects/' %></li>
+          <li><%= link_to "Groups",    '/groups/' %></li>
+          <li><%= link_to "Users",    '/users/' %></li>
+          <li><%= link_to "Help",    '/help/' %></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+<div class="container">
+    
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+  <%= yield %>
+
+  <%= link_to "Sign out", '/session/destroy', :method => :delete %>
+</div>
+</body>
+</html>
