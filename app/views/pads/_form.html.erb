@@ -20,12 +20,8 @@
     <%= f.text_field :p_name %>
   </div>
   <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_field :content %>
-  </div>
-  <div class="field">
     <%= f.label :pad_url %><br />
-    <%= f.text_field :pad_url %>
+    <%= f.text_field :pad_url, :value => @random_text, :readonly => true %>
   </div>
   <div class="actions">
     <%= f.submit %>

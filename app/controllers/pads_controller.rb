@@ -28,11 +28,19 @@ class PadsController < ApplicationController
   # GET /pads/new.json
   def new
     @pad = Pad.new
+    @random_text = generate_password(15)
 
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @pad }
     end
+  end
+
+  def generate_password(length=6)
+    chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'
+    password = ''
+    length.times { password << chars[rand(chars.size)] }
+    password
   end
 
   # GET /pads/1/edit
