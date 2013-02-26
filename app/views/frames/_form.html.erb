@@ -11,10 +11,6 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :image %><br />
-    <%= f.text_field :image %>
-  </div>
     <div class="field">
       <%= f.label :image %><br />
       <%= f.file_field :image %>
@@ -26,9 +22,18 @@
   </div>
     <div class="field">
       <%= f.label :p_name %><br />
-      <%= f.text_field :p_name %>
+      <%= f.text_field :p_name , :value => params[:scene_id] %>
     </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :pad_url %><br />
+      <%= f.text_field :pad_url, :value => params[:pad_url]  %>
+    </div>
+
+  <% if params[:scene_id].nil? || params[:pad_url].nil? %>
+    <%= flash[:message] = "Bitte das Formular NUR über die Projektansicht aufrufen!" %>
+  <% else %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
 <% end %>
