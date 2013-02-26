@@ -22,11 +22,11 @@
   </div>
     <div class="field">
       <%= f.label :p_name %><br />
-      <%= f.text_field :p_name , :value => params[:scene_id] %>
+      <%= f.text_field :p_name , :value => params[:scene_id], :readonly => true %>
     </div>
     <div class="field">
       <%= f.label :pad_url %><br />
-      <%= f.text_field :pad_url, :value => params[:pad_url]  %>
+      <%= f.text_field :pad_url, :value => params[:pad_url], :readonly => true  %>
     </div>
 
   <% if params[:scene_id].nil? || params[:pad_url].nil? %>
