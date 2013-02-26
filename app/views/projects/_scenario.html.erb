@@ -2,7 +2,7 @@
   <% @pads.each do |p| %>
       <div class="image-thumb">
             <a href="/projects/<%= @project.id %>?scene_id=<%= p.p_name %>&pad_url=<%= p.pad_url %>" onclick="changeContent()"><img src="<%= asset_path 'screenplay.gif' %>" /></a>
-        <p class="property-title"><%= p.story %></p>
+        <p class="property-title"><%= p.title %></p>
       </div>
   <% end %>
   <div class="image-thumb">
