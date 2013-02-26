@@ -21,16 +21,17 @@
         <% user.group_ids.each { |id| %>
         <%= link_to id, "/groups/#{id}" %>
         <%}%>
-    </td>
+    </td><!--"/message/create?sender=#{current_user.first_name}&receiver=#{user.first_name}&object=Invitation"-->
     <td><%= user.role%></td>
     <td><%= user.identifier_url %></td>
     <td>
         <% unless current_user.groups.empty?%>
           <%if !user.equals(current_user) && user.groups.empty?%>
-            <div><%=button_to "Einladen", "/message/create?sender=#{current_user.first_name}&receiver=#{user.first_name}&object='Invitation'", :remote => true, :id => 'einladung'%></div>
+            <button onclick="einladen('<%=current_user.first_name%>', '<%=user.first_name%>')">Einladen</button>
           <%end%>
         <%end%>
     </td>
+    <div class="einladen"></div>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <!-- <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
@@ -39,5 +40,19 @@
 </table>
 
 <br />
-
+<script>
+    function einladen(current, user){ // current, user
+    $.ajax({
+        type: "POST",
+        url:  "/message/create",
+        data: { sender: current, receiver: user, object: "Invitation" },
+        success: function(result){
+            alert('Das laeuft,,, CRAP !!! '+result);
+        },
+        error: function(xhr, status, err){
+            alert(err);
+        }
+    });
+}
+</script>
 <%= link_to 'New User', new_user_path %>

@@ -14,9 +14,9 @@
 <% @groups.each do |group| %>
   <tr>
     <td><%= group.status %></td>
-    <td><%= group.group_id %></td>
+    <td><%= group.num %></td>
     <td><% (group.users).each { |user| %>
-        <%= link_to user.name, user %>
+        <%= link_to user.first_name, user %>
     <%} %></td>
     <td>
       <% (group.projects).each { |project| %>

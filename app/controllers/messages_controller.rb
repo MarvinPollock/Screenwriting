@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
-  
+  #respond_to :html, :json, :js
   def index
-    
+    @message = Message.where(:receiver => current_user.first_name)
   end
   
   def new
@@ -12,32 +12,22 @@ class MessagesController < ApplicationController
     sender = params[:sender]
     receiver = params[:receiver]
     object = params[:object]
-    @message = Message.new
-    @message.sender = sender
-    @message.receiver = receiver
-    @message.object = object
-    respond_to do |format|
-      if object == "Invitation"
-        @message.content = "/message/response?sender=#{sender}&receiver=#{receiver}"
-        if @message.save
-          format.html{}
-          format.json{}
-          format.js
-        elsif
-          format.html{}
-          format.json{}
-          format.js
-        end
-      elsif
-        format.html{}
-        format.json{}
-        format.js
-      end
-    end
+    @msg = Message.new
+    @msg.sender = sender
+    @msg.receiver = receiver
+    @msg.object = object
+    #respond_to do |format|
+       if object == "Invitation"
+         @msg.content = "/message/antwort?sender=#{sender}&receiver=#{receiver}"
+         "Laeuft"
+       else
+         render :error => "Error"
+       end
+    #end
     
   end
   
-  def response
+  def antwort
     senderName = params[:sender]
     receiverName = params[:receiver]
     
