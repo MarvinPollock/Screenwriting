@@ -22,10 +22,18 @@ class FramesController < ApplicationController
     end
   end
 
+  def generate_password(length=6)
+    chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'
+    password = ''
+    length.times { password << chars[rand(chars.size)] }
+    password
+  end
+
   # GET /frames/new
   # GET /frames/new.json
   def new
     @frame = Frame.new
+    @random_text = generate_password(15)
 
     respond_to do |format|
       format.html # new.html.erb
