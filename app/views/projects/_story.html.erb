@@ -2,7 +2,7 @@
   <% @frames.each do |p| %>
           <% if (params[:scene_id].to_s == p.p_name) && (params[:pad_url] == p.pad_url) %>
               <div class="image-thumb">
-                <img src="<%= asset_path p.image %>" />
+                <a href="<%= asset_path p.image %>" target="_blank"><img src="<%= asset_path p.image %>" /></a>
                 <p class="property-title"><%= p.p_name %></p>
               </div>
           <% end %>
