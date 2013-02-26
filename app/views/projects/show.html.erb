@@ -13,7 +13,7 @@
         <center>&darr;</center>
   </div>
 </div>
-<div class="row-fluid" style="overflow: auto;">
+<div class="row-fluid" id="storyboard" style="overflow: auto;">
   <%= render 'story' %>
 </div>
 <div class="container-fluid">
@@ -26,3 +26,55 @@
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+
+<script>
+    function changeContent(project_id){
+        $.ajax({
+            type: "POST",
+            url:  '/projects/loadFrames',
+            dataType: "json",
+            data: {id: project_id},
+            success: function(result, txtStatus, xhr){
+                var framElem = document.getElementByName('image-thumb');
+                for(var i = 0; i < result.length; i++){
+                    imgPath = getPath("");
+                    img = document.createElement('img');
+                    img.src = imgPath;
+                    a = document.createElement('a');
+                    a.href = imgPath;
+                    a.appendChild(img);
+                    p = document.createElement('p');
+                    p.innerHTML = result[i].p_name;
+                    framElem.appendChild(a);
+                    framElem.appendChild(p);
+                }
+            },
+            error: function(err){
+                alert(err);
+            }
+        });
+    }
+
+        function changeContent2 (pad_url){
+
+
+
+
+            document.getElementById('storyboard').innerHTML =
+                        "<div id='story'' style='overflow: auto;display: inline'>" +
+                            "<% @frames.each do |p| %>" +
+                                "" +
+                                "<div class='image-thumb'>" +
+                                    "<a href='<%= asset_path p.image %>' target='_blank'><img src='<%= asset_path p.image %>' /></a>" +
+                                    "<p class='property-title'><%= p.p_name %></p>" +
+                                "</div>" +
+                            "<% end %>" +
+                                "<div class='image-thumb'>" +
+                                    "<a href='/frames/new?pad_url=<%= params[:pad_url] %>&scene_id=<%= params[:scene_id] %>'><img src='<%= asset_path 'Plus_sign.png' %>' width='20px' id='plus-sign' /></a>" +
+                                "</div>" +
+                        "</div>";
+
+
+        }
+
+</script>
