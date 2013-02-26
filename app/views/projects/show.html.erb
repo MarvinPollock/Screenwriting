@@ -58,17 +58,21 @@
         function changeContent2 (pad_url){
 
             document.getElementById('storyboard').innerHTML =
-                        "<div id='story'' style='overflow: auto;display: inline'>" +
+                        "<ul class='thumbnails' id='story'' style='overflow: auto;display: inline'>" +
                             "<% @frames.each do |p| %>" +
-                                "<div class='image-thumb'>" +
-                                    "<a href='<%= asset_path p.image %>' target='_blank'><img src='<%= asset_path p.image %>' /></a>" +
-                                    "<p class='property-title'><%= p.p_name %></p>" +
-                                "</div>" +
+                                "<li class='span1'>" +
+                                  "<a href='<%= asset_path p.image %>' target='_blank' class='thumbnail'></a>" +
+                                  "<img data-src='<%= asset_path p.image %>/100x100' src='<%= asset_path p.image %>' alt='asd'></a>" +
+                                  "</a>" +
+                                "</li>" +
                             "<% end %>" +
-                                "<div class='image-thumb'>" +
-                                    "<a href='/frames/new'><img src='<%= asset_path 'Plus_sign.png' %>' width='20px' id='plus-sign' /></a>" +
-                                "</div>" +
-                        "</div>";
+                                "<li class='span1'>" +
+                                "<a href='/frames/new' target='_blank' class='thumbnail'></a>" +
+                                "<img data-src='<%= asset_path 'Plus_sign.png' %>/100x100' src='<%= asset_path 'Plus_sign.png' %>' alt='asd'></a>" +
+                                "</a>" +
+                                "</li>" +
+                        "</ul>";
+
         }
 
 </script>
