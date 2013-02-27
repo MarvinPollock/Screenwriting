@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label "Projektname" %><br />
-    <%= f.text_field :p_name %>
+    <%= f.text_field :p_name, :value => params[:name], :readonly => true %>
   </div>
   <div class="field">
     <%= f.label :pad_url %><br />
