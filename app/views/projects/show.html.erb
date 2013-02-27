@@ -81,41 +81,4 @@
         });
     }
 
-        function changeContent2 (selected_frames, pad_url){
-
-            var obj = selected_frames;
-
-            var counter = 0;
-
-            var image_url = "";
-
-            function getImagePath(){
-                alert(obj[counter].pad_url + " " + pad_url);
-                if(pad_url == obj[counter].pad_url){
-                    image_url = obj[counter].image.url;
-
-                    return image_url;
-                }
-                counter++;
-            }
-
-
-            document.getElementById('storyboard').innerHTML =
-                        "<ul class='thumbnails' id='story' style='overflow: auto;display: inline'>" +
-                            "<% @frames.each do |p| %>" +
-                                "<li class='span1'>" +
-                                  "<a href=" + getImagePath() + " target='_blank' class='thumbnail'></a>" +
-                                  "<img data-src='" + image_url + "/100x100' src=" + image_url + " alt='asd'></a>" +
-                                  "</a>" +
-                                "</li>" +
-                            "<% end %>" +
-                                "<li class='span1'>" +
-                                "<a href='/frames/new' class='thumbnail'></a>" +
-                                "<img data-src='<%= asset_path 'Plus_sign.png' %>/100x100' src='<%= asset_path 'Plus_sign.png' %>' alt='asd'></a>" +
-                                "</a>" +
-                                "</li>" +
-                        "</ul>";
-
-        }
-
 </script>
