@@ -72,15 +72,15 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(params[:project])
-
+    @group = Group.find(:first, :conditions => ["num=?", params[:gNumber]])
+    @project = Project.new
+    @project.name = params[:pName]
     respond_to do |format|
-      if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render json: @project, status: :created, location: @project }
+      if @group
+        group.projects << @project
+        render :text => 'Project was successfully created.'
       else
-        format.html { render action: "new" }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+        render :text => 'Error, please try later.'
       end
     end
   end

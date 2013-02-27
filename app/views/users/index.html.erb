@@ -59,7 +59,6 @@
         url:  "/user/groups",
         dataType: "json",
         success: function(result){
-            alert(result);
             if(result.length == 1){
                 $.ajax({
                     type: "GET",
@@ -137,7 +136,7 @@
                     Cancel: function(){
                         $(this).dialog("close");
                     }
-                }, 
+                }
             });
         },
          _destroy: function() {

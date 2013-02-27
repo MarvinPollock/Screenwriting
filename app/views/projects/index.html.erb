@@ -26,4 +26,119 @@
 
 <br />
 
-<%= link_to 'New Project', new_project_path %>
+<form method="get" action="<%= new_project_path %>">
+
+</form>
+<button class="btn" onclick="anlegen()" type="submit">New Project</button>
+
+<div class="ui-widget" id="dialog-project" title="Create a project">
+  <p class="pro_error"></p>
+  <p class="validateTips"></p>
+  <form>
+    <fieldset>
+      <label for="proj_name">Project name:</label>
+      <input type="text" id="proj_name" />
+      <label for="group_number">Group number:</label>
+      <select id="group_number" ></select>
+    </fieldset>
+  </form>
+</div>
+
+<div class="ui-widget" id="warnung">You must belong to a group in order to create a project</div>
+
+<br />
+<script>
+    function anlegen(){ // current, user
+        $.ajax({
+            type: "GET",
+            url:  "/user/groups",
+            dataType: "json",
+            success: function(result){
+                alert(result);
+                if (result.length > 0) {
+                    for (var i = 0; i < result.length; i++) {
+                        $('select').append($('<option>', {
+                            value: result[i].num,
+                            text: '' + result[i].num
+                        }));
+                    }
+                $("#dialog-project").dialog("open");
+                } else {
+                    $("#warnung").dialog("open");
+                }
+            },
+            error: function(xhr, status, err){
+                alert(err);
+            }
+        });
+    }
+
+    (function($){
+        $.widget( "ui.combobox", {
+            _create: function() {
+                $('#dialog-project').hide();
+                var select = this.element,
+                        selected = select.children(":selected"),
+                        tips = $(".validateTips"),
+                        errorTips = $(".error"),
+                        value = selected.val() ? selected.text() : "";
+
+                function updateTips(tips){
+                    tips.addClass("ui-state-highlight");
+                    setTimeout(function(){
+                        tips.removeClass("ui-state-highlight", 1500);
+                    }, 500);
+                }
+
+                $("#warnung").dialog({
+                    autoOpen: false,
+                    height: 300,
+                    width: 300,
+                    modal: true,
+                    buttons: {
+                           "Ok": function(){
+                                $(this).dialog("close");
+                           }
+                    }
+                });
+
+                $("#dialog-project").dialog({
+                    autoOpen: false,
+                    height: 300,
+                    width: 350,
+                    modal: true,
+                    buttons: {
+                        "Ok": function(){
+                            if(selected.val() == ""){
+                                updateTips(tips);
+                                return;
+                            }else{
+                                var that = this;
+                                $.ajax({
+                                    type: "POST",
+                                    url:  '/projects/create',
+                                    dataType: "text",
+                                    data: { pName: $('#proj_name').val(), gNumber: $('#group_number').val() },
+                                    success: function(result){
+                                        $(that).dialog("close");
+                                    },
+                                    error: function(xhr, status, err){
+                                        $(".error").html(err);
+                                        updateTips(errorTips)
+                                    }
+                                });
+                            }
+                        },
+                        Cancel: function(){
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            },
+            _destroy: function() {
+                this.element.show();
+            }
+        });
+    })(jQuery);
+    $("#group_number").combobox();
+</script>
