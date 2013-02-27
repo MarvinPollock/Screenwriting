@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   #respond_to :html, :json, :js
   def index
-    @message = Message.where(:receiver => current_user.first_name)
+    @messages = Message.where(:receiver => current_user.first_name)
   end
   
   def new
@@ -12,41 +12,40 @@ class MessagesController < ApplicationController
     sender = params[:sender]
     receiver = params[:receiver]
     object = params[:object]
+    groupId = params[:groupId]
     @msg = Message.new
     @msg.sender = sender
     @msg.receiver = receiver
     @msg.object = object
-    #respond_to do |format|
+    #respond_with do |format|
        if object == "Invitation"
-         @msg.content = "/message/antwort?sender=#{sender}&receiver=#{receiver}"
-         "Laeuft"
+         @msg.content = "/message/antwort?sender=#{sender}&groupId=#{groupId}"
+         if @msg.save
+            render :text => "OK"
+         else
+           render :text => @msg.errors.full_messages
+         end
        else
-         render :error => "Error"
+         render :text => "Object stimmt nicht"
        end
     #end
     
   end
   
   def antwort
+    user = current_user
     senderName = params[:sender]
-    receiverName = params[:receiver]
-    
-    # ist der Sender in der Zwischenzeit einer Gruppe beigetreten?
-    # wenn ja, dann wird diese Einladung nicht mehr beruecksichtigt.
-    # Sonst wird noch geprueft, ob die Gruppe des Receivers schon die Maximale
-    # Anzahl an Mitglieder hat. Ist das nicht der Fall, dann wird der Sender in der 
-    # Gruppe aufgenommen und die Nachricht geloescht.
-    sender = User.find(:first, :conditions => ["first_name=?", senderName])
+    groupId = params[:groupId]
       
-    if sender.groups.empty?
-      receiver = User.find(:first, :conditions => ["first_name=?", receiverName])
-      if receiver.groups.size < 4
-        receiver.groups.first << sender
-      else
-        "Diese Gruppe ist schon voll. Suchen Sie sich eine andere Gruppe."
-      end
+    if sender = User.find(:first, :conditions => ["first_name=?", senderName])
+      
+       unless sender.groups.first.users.exists?(user)
+          sender.groups.find(:first, :conditions => ["id=?", groupId]).users << user
+       end
+       
+       render :text => "Sie sind jetzt in der Gruppe drin."
     else
-      "Dieser Link ist nicht mehr gueltig, da Sie schon zu einer anderen Gruppe gehoeren. "
+        render :text => "Diese Gruppe ist schon voll. Suchen Sie sich eine andere Gruppe."
     end 
     
   end

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  respond_to :html, :json
   before_filter :ensure_signed_in
   load_and_authorize_resource
   # GET /users
@@ -82,4 +83,10 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def groups
+    user = current_user
+    respond_with(user.groups)
+  end
+  
 end

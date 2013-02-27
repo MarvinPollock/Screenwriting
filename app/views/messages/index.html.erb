@@ -1,28 +1,39 @@
 <h1>Listing messages</h1>
 
-<table>
+<table class="table table-bordered table-hover ui-widget ui-widget-content">
+ <thead class="ui-widget-header">
   <tr>
     <th>Sender</th>
-    <th>Receiver</th>
     <th>Object</th>
-    <th>Content</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Response</th>
   </tr>
-
+ </thead>
+<tbody>
 <% @messages.each do |message| %>
   <tr>
     <td><%= message.sender %></td>
-    <td><%= message.receiver %></td>
     <td><%= message.object %></td>
-    <td><%= message.content %></td>
-    <td><%= link_to 'Show', message %></td>
-    <td><%= link_to 'Edit', edit_message_path(message) %></td>
-    <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><button onclick="annehmen('<%=message.content%>')">annehmen</button></td>
   </tr>
 <% end %>
+</tbody>
 </table>
+
+<script>
+    function annehmen(url){ // current, user
+    $.ajax({
+        type: "GET",
+        url:  url,
+        dataType: "text",
+        success: function(result){
+            alert(result);
+        },
+        error: function(xhr, status, err){
+            alert(err);
+        }
+    });
+}
+</script>
 
 <br />
 

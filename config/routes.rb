@@ -23,6 +23,8 @@ CoBookProjekt::Application.routes.draw do
   match 'session/sign_in' => 'sessions#sign_in'
 
   resources :users
+  
+  match '/user/groups' => 'users#groups'
 
   resources :frames
 

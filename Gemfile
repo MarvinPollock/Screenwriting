@@ -32,6 +32,8 @@ end
 
 gem 'jquery-rails', "~> 2.2.1"
 
+gem 'jquery-ui-rails'
+
 gem 'binding_of_caller'
 
 group :production do
