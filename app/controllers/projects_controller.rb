@@ -26,15 +26,29 @@ class ProjectsController < ApplicationController
   end
 
   def loadFrames
-    @project = Project.find(params[:id])
-    @pad = @project.pads.find(:first, :conditions => ["p_name=?", params[:p_name]])
+    if projects = Project.all
+      gefunden = false
+      projects.each { |proj|
+          if proj.pads.empty?
+            next
+          else
+            if @pad = proj.pads.find(:first, :conditions => ["id=?", params[:pad][:id]])
+              gefunden = true
+              break
+            else
+              next
+            end
+          end
+      }
+    end
+
     #@frames = Frame.find_all_by_p_name(@project.name)
 
-    if @pad
+    if gefunden
       @frames = @pad.frames
       respond_with(@frames, :location => nil)
     else
-      respond_with({:error => "ERROR"}, :location => nil)
+      respond_with(:error => @frames, :location => nil)
     end
   end
 

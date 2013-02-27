@@ -50,9 +50,11 @@ class FramesController < ApplicationController
   # POST /frames.json
   def create
     @frame = Frame.new(params[:frame])
+    @pad = Pad.find(:first, :conditions => ["p_name=?", @frame.p_name])
 
     respond_to do |format|
-      if @frame.save
+      if @pad
+        @pad.frames << @frame
         format.html { redirect_to @frame, notice: 'Frame was successfully created.' }
         format.json { render json: @frame, status: :created, location: @frame }
       else

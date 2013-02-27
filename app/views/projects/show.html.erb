@@ -13,8 +13,10 @@
         <center>&darr;</center>
   </div>
 </div>
-<div class="row-fluid" id="storyboard" style="overflow: auto;">
-  <%= render 'story' %>
+<div class="row-fluid" style="overflow: auto;">
+    <div class="row-fluid" id="storyboard" style="overflow: auto;">
+      <%= render 'story' %>
+    </div>
 </div>
 <div class="container-fluid">
   <div class="row-fluid">
@@ -28,46 +30,87 @@
 <%= link_to 'Back', projects_path %>
 
 <script>
-    function changeContent(project_id){
+    function changeContent(pad){
         $.ajax({
             type: "POST",
             url:  '/projects/loadFrames',
             dataType: "json",
-            data: {id: project_id},
-            success: function(result, txtStatus, xhr){
-                var framElem = document.getElementByName('image-thumb');
+            data: {pad: pad},
+            success: function(result){
+                var thumbnails = 'thumbnails';
+                var framElem = $('#storyboard');
+                framElem.empty();
+                var ul = $('<ul>', {
+                   id: 'story'
+                }).addClass(thumbnails).css({overflow: 'auto', display: 'inline'});
+                framElem.append(ul);
                 for(var i = 0; i < result.length; i++){
-                    imgPath = getPath("");
-                    img = document.createElement('img');
-                    img.src = imgPath;
-                    a = document.createElement('a');
-                    a.href = imgPath;
-                    a.appendChild(img);
-                    p = document.createElement('p');
-                    p.innerHTML = result[i].p_name;
-                    framElem.appendChild(a);
-                    framElem.appendChild(p);
+                    var li = $('<li>').addClass("span1");
+
+                    var imgPath = result[i].image.url;
+
+                    var dataSrc = imgPath + "/100x100";
+
+                    var img = $('<img>', {
+                        src: imgPath,
+                        alt: result[i].title
+                    });
+
+                    var a = $('<a>', {
+                        href: imgPath,
+                        target: '_blank'
+                    }).addClass(thumbnails).append(img);
+
+                    li.append(a);
+
+                    ul.append(li);
                 }
+                var li2 = $('<li>').addClass('span1');
+                var a2 = $('<a>', {
+                    href: '/frames/new'
+                }).addClass(thumbnails);
+                var img2 = $('<img>', {
+                    src: '<%= asset_path 'Plus_sign.png' %>'
+                });
+                a2.append(img2).appendTo(li2);
+                ul.append(li2);
             },
             error: function(err){
-                alert(err);
+                alert("WTF: "+err.error);
             }
         });
     }
 
-        function changeContent2 (pad_url){
+        function changeContent2 (selected_frames, pad_url){
+
+            var obj = selected_frames;
+
+            var counter = 0;
+
+            var image_url = "";
+
+            function getImagePath(){
+                alert(obj[counter].pad_url + " " + pad_url);
+                if(pad_url == obj[counter].pad_url){
+                    image_url = obj[counter].image.url;
+
+                    return image_url;
+                }
+                counter++;
+            }
+
 
             document.getElementById('storyboard').innerHTML =
-                        "<ul class='thumbnails' id='story'' style='overflow: auto;display: inline'>" +
+                        "<ul class='thumbnails' id='story' style='overflow: auto;display: inline'>" +
                             "<% @frames.each do |p| %>" +
                                 "<li class='span1'>" +
-                                  "<a href='<%= asset_path p.image %>' target='_blank' class='thumbnail'></a>" +
-                                  "<img data-src='<%= asset_path p.image %>/100x100' src='<%= asset_path p.image %>' alt='asd'></a>" +
+                                  "<a href=" + getImagePath() + " target='_blank' class='thumbnail'></a>" +
+                                  "<img data-src='" + image_url + "/100x100' src=" + image_url + " alt='asd'></a>" +
                                   "</a>" +
                                 "</li>" +
                             "<% end %>" +
                                 "<li class='span1'>" +
-                                "<a href='/frames/new' target='_blank' class='thumbnail'></a>" +
+                                "<a href='/frames/new' class='thumbnail'></a>" +
                                 "<img data-src='<%= asset_path 'Plus_sign.png' %>/100x100' src='<%= asset_path 'Plus_sign.png' %>' alt='asd'></a>" +
                                 "</a>" +
                                 "</li>" +
