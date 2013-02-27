@@ -22,10 +22,18 @@ class FramesController < ApplicationController
     end
   end
 
+  def generate_password(length=6)
+    chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'
+    password = ''
+    length.times { password << chars[rand(chars.size)] }
+    password
+  end
+
   # GET /frames/new
   # GET /frames/new.json
   def new
     @frame = Frame.new
+    @random_text = generate_password(15)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,9 +50,11 @@ class FramesController < ApplicationController
   # POST /frames.json
   def create
     @frame = Frame.new(params[:frame])
+    @pad = Pad.find(:first, :conditions => ["p_name=?", @frame.p_name])
 
     respond_to do |format|
-      if @frame.save
+      if @pad
+        @pad.frames << @frame
         format.html { redirect_to @frame, notice: 'Frame was successfully created.' }
         format.json { render json: @frame, status: :created, location: @frame }
       else

@@ -14,7 +14,9 @@
   </div>
 </div>
 <div class="row-fluid" style="overflow: auto;">
-  <%= render 'story' %>
+    <div class="row-fluid" id="storyboard" style="overflow: auto;">
+      <%= render 'story' %>
+    </div>
 </div>
 <div class="container-fluid">
   <div class="row-fluid">
@@ -26,3 +28,57 @@
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+
+<script>
+    function changeContent(pad){
+        $.ajax({
+            type: "POST",
+            url:  '/projects/loadFrames',
+            dataType: "json",
+            data: {pad: pad},
+            success: function(result){
+                var thumbnails = 'thumbnails';
+                var framElem = $('#storyboard');
+                framElem.empty();
+                var ul = $('<ul>', {
+                   id: 'story'
+                }).addClass(thumbnails).css({overflow: 'auto', display: 'inline'});
+                framElem.append(ul);
+                for(var i = 0; i < result.length; i++){
+                    var li = $('<li>').addClass("span1");
+
+                    var imgPath = result[i].image.url;
+
+                    var dataSrc = imgPath + "/100x100";
+
+                    var img = $('<img>', {
+                        src: imgPath,
+                        alt: result[i].title
+                    });
+
+                    var a = $('<a>', {
+                        href: imgPath,
+                        target: '_blank'
+                    }).addClass(thumbnails).append(img);
+
+                    li.append(a);
+
+                    ul.append(li);
+                }
+                var li2 = $('<li>').addClass('span1');
+                var a2 = $('<a>', {
+                    href: '/frames/new'
+                }).addClass(thumbnails);
+                var img2 = $('<img>', {
+                    src: '<%= asset_path 'Plus_sign.png' %>'
+                });
+                a2.append(img2).appendTo(li2);
+                ul.append(li2);
+            },
+            error: function(err){
+                alert("WTF: "+err.error);
+            }
+        });
+    }
+
+</script>

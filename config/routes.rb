@@ -32,6 +32,8 @@ CoBookProjekt::Application.routes.draw do
 
   resources :projects
 
+  match 'projects/loadFrames' => 'projects#loadFrames'
+
   resources :groups
 
   resources :users

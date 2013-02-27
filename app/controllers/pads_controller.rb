@@ -52,9 +52,11 @@ class PadsController < ApplicationController
   # POST /pads.json
   def create
     @pad = Pad.new(params[:pad])
+    @project = Project.find(:first, :conditions => ["name=?", @pad.p_name])
 
     respond_to do |format|
-      if @pad.save
+      if @project
+        @project.pads << @pad
         format.html { redirect_to @pad, notice: 'Pad was successfully created.' }
         format.json { render json: @pad, status: :created, location: @pad }
       else

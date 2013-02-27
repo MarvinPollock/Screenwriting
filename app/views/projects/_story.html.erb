@@ -1,13 +1,1 @@
-<div id="story" style="overflow: auto;display: inline">
-  <% @frames.each do |p| %>
-          <% if (params[:scene_id].to_s == p.p_name) && (params[:pad_url] == p.pad_url) %>
-              <div class="image-thumb">
-                <a href="<%= asset_path p.image %>" target="_blank"><img src="<%= asset_path p.image %>" /></a>
-                <p class="property-title"><%= p.p_name %></p>
-              </div>
-          <% end %>
-  <% end %>
-  <div class="image-thumb">
-    <a href="/frames/new?pad_url=<%= params[:pad_url] %>&scene_id=<%= params[:scene_id] %>"><img src="<%= asset_path 'Plus_sign.png' %>" width="20px" id="plus-sign" /></a>
-  </div>
-</div>
+

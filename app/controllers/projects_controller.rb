@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  respond_to :json, :html
   before_filter :ensure_signed_in
   load_and_authorize_resource
   # GET /projects
@@ -21,6 +22,33 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
+    end
+  end
+
+  def loadFrames
+    if projects = Project.all
+      gefunden = false
+      projects.each { |proj|
+          if proj.pads.empty?
+            next
+          else
+            if @pad = proj.pads.find(:first, :conditions => ["id=?", params[:pad][:id]])
+              gefunden = true
+              break
+            else
+              next
+            end
+          end
+      }
+    end
+
+    #@frames = Frame.find_all_by_p_name(@project.name)
+
+    if gefunden
+      @frames = @pad.frames
+      respond_with(@frames, :location => nil)
+    else
+      respond_with(:error => @frames, :location => nil)
     end
   end
 
