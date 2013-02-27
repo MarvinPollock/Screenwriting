@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  #respond_to :html, :json, :js
+  respond_to :html, :json, :js
   def index
     @messages = Message.where(:receiver => current_user.first_name)
   end
@@ -39,13 +39,17 @@ class MessagesController < ApplicationController
       
     if sender = User.find(:first, :conditions => ["first_name=?", senderName])
       
-       unless sender.groups.first.users.exists?(user)
-          sender.groups.find(:first, :conditions => ["id=?", groupId]).users << user
+       group = sender.groups.find(:first, :conditions => ["id=?", groupId])
+       
+       if group && !group.users.exists?(user)
+          group.users << user
+          render :text => "Sie sind jetzt in der Gruppe drin."
+       else
+         render :text => group.users
        end
        
-       render :text => "Sie sind jetzt in der Gruppe drin."
     else
-        render :text => "Diese Gruppe ist schon voll. Suchen Sie sich eine andere Gruppe."
+       render :text => "Diese Gruppe ist schon voll. Suchen Sie sich eine andere Gruppe."
     end 
     
   end
