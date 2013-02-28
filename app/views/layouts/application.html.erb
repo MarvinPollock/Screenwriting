@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8" />
   <title>CoBook</title>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
@@ -9,69 +10,78 @@
   <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
+   <script>
+    $(function() {
+        $( ".ui-menu" ).menu();
+    });
+    </script>
+
    <style>
-    body { 
-        font-size: 62.5%; 
+
+    body {
+        font-size: 62.5%;
     }
-    label{ 
-        display:block; 
+    label{
+        display:block;
     }
-    select.text { 
-        margin-bottom:12px; width:95%; padding: .4em; 
+    select.text {
+        margin-bottom:12px; width:95%; padding: .4em;
     }
-    fieldset { 
-        padding:0; border:0; margin-top:25px; 
+    fieldset {
+        padding:0; border:0; margin-top:25px;
     }
-    h1 { 
-        font-size: 1.2em; margin: .6em 0; 
+    h1 {
+        font-size: 1.2em; margin: .6em 0;
     }
-    .ui-dialog .ui-state-error { 
-        padding: .3em; 
+    .ui-dialog .ui-state-error {
+        padding: .3em;
     }
-    .validateTips { 
-        border: 1px solid transparent; padding: 0.3em; 
+    .validateTips {
+        border: 1px solid transparent; padding: 0.3em;
     }
    </style>
 </head>
 <body>
-<header class="navbar navbar-fixed-top navbar-inverse">
 
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <!-- # link_to "sample app", '#', id: "logo" -->
+          <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
 
-  <div class="navbar">
-    <div class="navbar-inner">
-      <div class="container">
-        <!-- # link_to "sample app", '#', id: "logo" -->
-        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
+          <!-- Be sure to leave the brand out there if you want it shown -->
+          <a class="brand" href="/">CoBook</a>
 
-        <!-- Be sure to leave the brand out there if you want it shown -->
-        <a class="brand" href="/">CoBook</a>
-
-        <!-- Everything you want hidden at 940px or less, place within here -->
-        <div class="nav-collapse collapse">
-          <nav>
-            <ul class="nav pull-right">
-              <li><%= link_to "Home",    '/' %></li>
-              <li>
-                <%= link_to "Projects",    '/projects/' %>
-                <ul>
-                  <li><a onclick="erstellen()">New Project</a></li>
+          <!-- Everything you want hidden at 940px or less, place within here -->
+          <div class="nav-collapse collapse">
+            <nav>
+              <ul class="nav pull-right">
+                  <li><%= link_to "Home", '/' %></li>
+                  <li>
+                      <%= link_to "Projects", '/projects/' %>
+                      <ul>
+                          <li onclick="projectAnlegen()"><a href="">New project</a></li>
+                      </ul>
+                  </li>
+                  <li>
+                      <%= link_to "Groups", '/groups/' %>
+                      <ul>
+                          <li onclick="groupAnlegen()"><a href="">New group</a></li>
+                      </ul>
+                  </li>
+                  <li><%= link_to "Users",    '/users/' %></li>
+                  <li><%= link_to "Messages",    '/messages/' %></li>
+                  <li><%= link_to "Help",    '/help/' %></li>
+                  <li><%= link_to "Signout",    '/session/destroy' %></li>
                 </ul>
-              </li>
-              <li><%= link_to "Groups",    '/groups/' %></li>
-              <li><%= link_to "Users",    '/users/' %></li>
-              <li><%= link_to "Messages",    '/messages/' %></li>
-              <li><%= link_to "Help",    '/help/' %></li>
-              <li><%= link_to "Signout",    '/session/destroy' %></li>
-            </ul>
-          </nav>
+              </nav>
+            </div>
         </div>
-
-      </div>
     </div>
   </div>
 

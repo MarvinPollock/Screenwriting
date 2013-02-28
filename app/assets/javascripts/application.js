@@ -17,6 +17,7 @@
 //= require_tree .
 
 function getUserGroupsAsJson(){
+	var result = doAjax("GET", "", "/user/groups", "json", null);
 	$.ajax({
 		type: "GET",
 		url:  "/user/groups",
@@ -40,28 +41,63 @@ function getUserGroupsAsJson(){
 	});
 }
 
-function anlegen(){ 
+function doAjax(type, contentType, url, dataType, data){
 	$.ajax({
-		type: "GET",
-		url:  "/user/groups",
-		dataType: "json",
+		type: type,
+		url:  url,
+		contentType: contentType == "" ? "application/x-www-form-urlencoded; charset=UTF-8" : contentType,
+		dataType: dataType,
 		success: function(result){
-			if (result.length > 0) {
-				for (var i = 0; i < result.length; i++) {
-					$('select').append($('<option>', {
-						value: result[i].num,
-						text: '' + result[i].num
-					}));
-				}
-				$("#dialog-project").dialog("open");
-			} else {
-				$("#warnung").dialog("open");
-			}
+			return {success: true, data: result};
 		},
 		error: function(xhr, status, err){
-			alert(err);
+			return {success: false, data: err};
 		}
 	});
+}
+
+function einladen(current, user){
+    var returnVal = doAjax("GET", "json; charset=UTF-8", "/user/groups", "json", null);    
+    if(returnVal.success){
+    	if(returnVal.data.length == 1){
+    		returnVal = doAjax("GET", "", "/message/create", "text", {sender: current, receiver: user, object: "Invitation", groupId: result[0].id});
+            if(!returnVal.success){
+            	alert(returnVal.data)
+            }
+        }else if(returnVal.data.length > 1){
+        	var result = returnVal.data;
+            for(var i=0; i<result.length; i++){
+                $('select').append($('<option>', {
+                value: result[i].id,
+                text: ''+result[i].id
+                }));
+            }
+            $("#dialog-group").data("data", {sender: current, receiver: user}).dialog("open");
+        }else{
+            alert("Empty group");
+        }
+    }else{
+    	alert(returnVal.data);
+    }
+}
+
+function projectAnlegen(){ 
+	var result = doAjax("GET", "", "/user/groups", "json", data)
+	if(returnVal.success){
+    	if(result.length > 0){
+    		for (var i = 0; i < result.length; i++) {
+				$('select').append($('<option>', {
+					value: result[i].num,
+					text: '' + result[i].num
+				}));
+			}
+			$("#dialog-project").dialog("open");
+        }else {
+			$("#warnung").dialog("open");
+		}
+    }else{
+    	alert(returnVal.data);
+    }
 }
 
 (function($){
@@ -70,8 +106,6 @@ function anlegen(){
 			$('#dialog-project').hide();
 			var select = this.element,
 			selected = select.children(":selected"),
-			tips = $(".validateTips"),
-			errorTips = $(".error"),
 			value = selected.val() ? selected.text() : "";
 
 			function updateTips(tips){
@@ -81,7 +115,7 @@ function anlegen(){
 				}, 500);
 			}
 
-			$("#warnung").dialog({
+			$(".proj_warnung").dialog({
 				autoOpen: false,
 				height: 300,
 				width: 300,
@@ -108,20 +142,13 @@ function anlegen(){
 							updateTips(tips);
 							return;
 						}else{
-							var that = this;
-							$.ajax({
-								type: "POST",
-								url:  '/projects/create',
-								dataType: "text",
-								data: { pName: $('#proj_name').val(), gNumber: $('#group_number').val() },
-								success: function(result){
-									$(that).dialog("close");
-								},
-								error: function(xhr, status, err){
-									$(".error").html(err);
-									updateTips(errorTips);
-								}
-							});
+							var result = doAjax("POST", "", "/projects/create", "text", { pName: $('#proj_name').val(), gNumber: $('#group_number').val() })
+							if(result.success){
+								$(this).dialog("close");
+							}else{
+								$(".proj_error").html(result.data);
+								updateTips($(".proj_tips"));
+							}
 						}
 					},
 					Cancel: function(){
@@ -146,20 +173,13 @@ function anlegen(){
                             return;
                         }else{
                             var data = $(this).data("data");
-                            var that = this;
-                            $.ajax({
-                                type: "GET",
-                                url:  "/message/create",
-                                dataType: "text",
-                                data: { sender: data.sender, receiver: data.receiver, object: "Invitation", groupId: selected.val() }, 
-                                success: function(result){
-                                    $(that).dialog("close");
-                                },
-                                error: function(xhr, status, err){
-                                	$(".error").html(err);
-                                	updateTips(errorTips);
-                                }
-                            });
+                            var result = doAjax("GET", "", "/message/create", "text", { sender: data.sender, receiver: data.receiver, object: "Invitation", groupId: selected.val() })
+                            if(result.success){
+                            	$(this).dialog("close");
+                            }else{
+                            	$(".user_error").html(err);
+                            	updateTips($(".user_tips"));
+                            }
                         }
                     },
                     Cancel: function(){
@@ -176,4 +196,3 @@ function anlegen(){
 		}
 	});
 })(jQuery);
-$("#group_number").combobox();

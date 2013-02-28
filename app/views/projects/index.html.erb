@@ -29,11 +29,11 @@
 <form method="get" action="<%= new_project_path %>">
 
 </form>
-<button class="btn" onclick="anlegen()" type="submit">New Project</button>
+<button class="btn" onclick="projectAnlegen()" type="submit">New Project</button>
 
 <div class="ui-widget" id="dialog-project" title="Create a project">
-  <p class="pro_error"></p>
-  <p class="validateTips"></p>
+  <p class="proj_error"></p>
+  <p class="proj_tips"></p>
   <form>
     <fieldset>
       <label for="proj_name">Project name:</label>
@@ -44,7 +44,7 @@
   </form>
 </div>
 
-<div class="ui-widget" id="warnung">You must belong to a group in order to create a project</div>
+<div class="ui-widget proj_warnung">You must belong to a group in order to create a project</div>
 
 <br />
 <script>
