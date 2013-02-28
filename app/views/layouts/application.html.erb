@@ -41,11 +41,17 @@
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home",    '/' %></li>
-          <li><%= link_to "Projects",    '/projects/' %></li>
+          <li>
+              <%= link_to "Projects",    '/projects/' %>
+              <ul>
+                  <li><%= link_to "Projects", new_project_path %></li>
+              </ul>
+          </li>
           <li><%= link_to "Groups",    '/groups/' %></li>
           <li><%= link_to "Users",    '/users/' %></li>
           <li><%= link_to "Messages",    '/messages/' %></li>
           <li><%= link_to "Help",    '/help/' %></li>
+          <li><%= link_to "Signout",    '/session/destroy' %></li>
         </ul>
       </nav>
     </div>

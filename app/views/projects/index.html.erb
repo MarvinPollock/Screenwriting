@@ -54,7 +54,6 @@
             url:  "/user/groups",
             dataType: "json",
             success: function(result){
-                alert(result);
                 if (result.length > 0) {
                     for (var i = 0; i < result.length; i++) {
                         $('select').append($('<option>', {

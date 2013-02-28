@@ -33,6 +33,8 @@ CoBookProjekt::Application.routes.draw do
   resources :projects
 
   match 'projects/loadFrames' => 'projects#loadFrames'
+  
+  match '/projects/create' => 'projects#create'
 
   resources :groups
 

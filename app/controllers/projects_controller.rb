@@ -1,8 +1,7 @@
 class ProjectsController < ApplicationController
-  respond_to :json, :html
   before_filter :ensure_signed_in
-  skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
   load_and_authorize_resource
+  respond_to :json, :html
   # GET /projects
   # GET /projects.json
   def index
