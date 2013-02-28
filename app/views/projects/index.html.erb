@@ -1,7 +1,7 @@
 <h1>Listing projects</h1>
 
-<table class="table">
-  <tr>
+<table class="table table-bordered table-hover ui-widget ui-widget-content">
+  <tr class="ui-widget-header">
     <th>Name</th>
     <th>Group</th>
     <th>Created</th>
@@ -113,11 +113,13 @@
                                 return;
                             }else{
                                 var that = this;
+                                var data = JSON.stringify({pName: $('#proj_name').val(), gNumber:  $('#group_number').val()});
                                 $.ajax({
                                     type: "POST",
                                     url:  '/projects/create',
-                                    dataType: "text",
-                                    data: { pName: $('#proj_name').val(), gNumber: $('#group_number').val() },
+                                    contentType: "application/json",
+                                    dataType: "json",
+                                    data: data,
                                     success: function(result){
                                         $(that).dialog("close");
                                     },

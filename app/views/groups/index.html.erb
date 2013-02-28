@@ -1,13 +1,11 @@
 <h1>Listing groups</h1>
 
-<table class="table">
-  <tr>
-    <th>Status</th>
+<table class="table table-bordered table-hover ui-widget ui-widget-content">
+  <tr class="ui-widget-header">
+    <th>Group name</th>
     <th>Group</th>
     <th>User</th>
     <th>Projects</th>
-    <th></th>
-    <th></th>
     <!-- <th></th> -->
   </tr>
 
@@ -23,13 +21,116 @@
           <%= link_to project.name, project %>
       <%} %>
     </td>
-    <td><%= link_to 'Show', group %></td>
-    <td><%= link_to 'Edit', edit_group_path(group) %></td>
-    <!-- <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
   </tr>
 <% end %>
 </table>
 
 <br />
+<button class="btn" onclick="anlegen()" type="submit">New Group</button>
 
-<%= link_to 'New Group', new_group_path %>
+<div class="ui-widget" id="dialog-project" title="Create a group">
+  <p class="pro_error"></p>
+  <p class="validateTips"></p>
+  <form>
+    <fieldset>
+      <label for="proj_name">Group name:</label>
+      <input type="text" id="group_name" />
+      <label for="group_number">Group number:</label>
+      <input type="text" id="group_number" />
+    </fieldset>
+  </form>
+</div>
+
+<div class="ui-widget" id="warnung">You must belong to a group in order to create a project</div>
+
+<br />
+<script>
+    function anlegen(){ // current, user
+        $.ajax({
+            type: "GET",
+            url:  "/user/groups",
+            dataType: "json",
+            success: function(result){
+                if (result.length > 0) {
+                    $("#dialog-project").dialog("open");
+                } else {
+                    $("#warnung").dialog("open");
+                }
+            },
+            error: function(xhr, status, err){
+                alert(err);
+            }
+        });
+    }
+
+    (function($){
+        $.widget( "ui.combobox", {
+            _create: function() {
+                $('#dialog-project').hide();
+                var select = this.element,
+                        selected = select.children(":selected"),
+                        tips = $(".validateTips"),
+                        errorTips = $(".error"),
+                        value = selected.val() ? selected.text() : "";
+
+                function updateTips(tips){
+                    tips.addClass("ui-state-highlight");
+                    setTimeout(function(){
+                        tips.removeClass("ui-state-highlight", 1500);
+                    }, 500);
+                }
+
+                $("#warnung").dialog({
+                    autoOpen: false,
+                    height: 300,
+                    width: 300,
+                    modal: true,
+                    buttons: {
+                        "Ok": function(){
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+
+                $("#dialog-project").dialog({
+                    autoOpen: false,
+                    height: 300,
+                    width: 350,
+                    modal: true,
+                    buttons: {
+                        "Ok": function(){
+                            if(selected.val() == ""){
+                                updateTips(tips);
+                                return;
+                            }else{
+                                var that = this;
+                                var data = JSON.stringify({gName: $('#group_name').val(), gNumber:  $('#group_number').val()});
+                                $.ajax({
+                                    type: "POST",
+                                    url:  '/groups/create',
+                                    contentType: "application/json",
+                                    dataType: "json",
+                                    data: data,
+                                    success: function(result){
+                                        $(that).dialog("close");
+                                    },
+                                    error: function(xhr, status, err){
+                                        $(".error").html(err);
+                                        updateTips(errorTips)
+                                    }
+                                });
+                            }
+                        },
+                        Cancel: function(){
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            },
+            _destroy: function() {
+                this.element.show();
+            }
+        });
+    })(jQuery);
+    $("#group_number").combobox();
+</script>

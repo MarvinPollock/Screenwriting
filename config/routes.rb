@@ -36,6 +36,8 @@ CoBookProjekt::Application.routes.draw do
   
   match '/projects/create' => 'projects#create'
 
+  match '/groups/create' => 'groups#create'
+
   resources :groups
 
   resources :users

@@ -1,13 +1,9 @@
-<div id="scenario" style="overflow: auto;display: inline">
-  <% @pads.each do |p| %>
-      <div class="image-thumb">
-              <a href="http://piratepad.net/<%= p.pad_url %>?fullScreen=1" target="pad-frame" onclick="changeContent(<%= p.to_json %>)"> <img src="<%= asset_path 'screenplay.gif' %>" /></a>
-        <p class="property-title"><%= p.title %></p>
-      </div>
-  <% end %>
-  <div class="image-thumb">
-    <a href="/pads/new?name=<%= @project.name %>"><img src="<%= asset_path 'Plus_sign.png' %>" width="20px" id="plus-sign" /></a>
-  </div>
-  <div class="test" style="font-size: 20px;"></div>
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    <% @pads.each do |p| %>
+        <li class="active"><a href="http://piratepad.net/<%= p.pad_url %>?fullScreen=1" target="pad-frame" data-toggle="tab" onclick="changeContent(<%= p.to_json %>)">Pad</a></li>
+    <% end %>
+        <li><a href="/pads/new?name=<%= @project.name %>"><img src="<%= asset_path 'Plus_sign.png' %>" width="10px" /> New Pad</a></li>
+  </ul>
 </div>
 

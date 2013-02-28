@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  layout 'login'
 
   def sign_in
     if signed_in?

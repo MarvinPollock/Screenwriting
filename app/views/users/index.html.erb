@@ -1,7 +1,7 @@
 <h1>Listing users</h1>
 
-<table class="table">
-  <tr>
+<table class="table table-bordered table-hover ui-widget ui-widget-content">
+  <tr class="ui-widget-header">
     <th>First name</th>
     <th>Lastname</th>
     <th>Group</th>
@@ -27,7 +27,7 @@
     <td>
         <% unless current_user.groups.empty?%>
           <%if !user.equals(current_user) && user.groups.empty?%>
-            <button onclick="einladen('<%=current_user.first_name%>', '<%=user.first_name%>')">Einladen</button>
+            <button class="btn" id="center-button" onclick="einladen('<%=current_user.first_name%>', '<%=user.first_name%>')">Einladen</button>
           <%end%>
         <%end%>
     </td>

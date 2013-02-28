@@ -39,10 +39,15 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
+
+
+
   # POST /groups
   # POST /groups.json
   def create
     @group = Group.new(params[:group])
+    @group.num = params[:gNumber]
+    @group.status = params[:gName]
     respond_to do |format|
       if g = Group.find(:first, :conditions => ["num = ?", params[:num]])
         flash[:notice] = "Die Gruppe mit der Nummer #{@group.num}  existiert bereits."

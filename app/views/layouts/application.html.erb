@@ -35,32 +35,49 @@
 </head>
 <body>
 <header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container">
-      <%= link_to "sample app", '#', id: "logo" %>
-      <nav>
-        <ul class="nav pull-right">
-          <li><%= link_to "Home",    '/' %></li>
-          <li>
-              <%= link_to "Projects",    '/projects/' %>
-              <ul>
-                  <li><%= link_to "Projects", new_project_path %></li>
-              </ul>
-          </li>
-          <li><%= link_to "Groups",    '/groups/' %></li>
-          <li><%= link_to "Users",    '/users/' %></li>
-          <li><%= link_to "Messages",    '/messages/' %></li>
-          <li><%= link_to "Help",    '/help/' %></li>
-          <li><%= link_to "Signout",    '/session/destroy' %></li>
-        </ul>
-      </nav>
+
+
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- # link_to "sample app", '#', id: "logo" -->
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+
+        <!-- Be sure to leave the brand out there if you want it shown -->
+        <a class="brand" href="/">CoBook</a>
+
+        <!-- Everything you want hidden at 940px or less, place within here -->
+        <div class="nav-collapse collapse">
+          <nav>
+            <ul class="nav pull-right">
+              <li><%= link_to "Home",    '/' %></li>
+              <li>
+                <%= link_to "Projects",    '/projects/' %>
+                <ul>
+                  <li><a onclick="erstellen()">New Project</a></li>
+                </ul>
+              </li>
+              <li><%= link_to "Groups",    '/groups/' %></li>
+              <li><%= link_to "Users",    '/users/' %></li>
+              <li><%= link_to "Messages",    '/messages/' %></li>
+              <li><%= link_to "Help",    '/help/' %></li>
+              <li><%= link_to "Signout",    '/session/destroy' %></li>
+            </ul>
+          </nav>
+        </div>
+
+      </div>
     </div>
   </div>
+
+
 </header>
 <div class="container">
-    
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
 
   <%= yield %>
 

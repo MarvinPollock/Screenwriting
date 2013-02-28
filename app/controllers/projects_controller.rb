@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   before_filter :ensure_signed_in
   load_and_authorize_resource
   respond_to :json, :html
+  skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
   # GET /projects
   # GET /projects.json
   def index
@@ -74,12 +75,14 @@ class ProjectsController < ApplicationController
     @group = Group.find(:first, :conditions => ["num=?", params[:gNumber]])
     @project = Project.new
     @project.name = params[:pName]
-    respond_to do |format|
+    @project.created = Date.today
+    @project.changed_date = Date.today
+    respond_with do |format|
       if @group
-        group.projects << @project
-        render :text => 'Project was successfully created.'
+        @group.projects << @project
+        format.json {render :json => {:success => 'Project was successfully created.'}}
       else
-        render :text => 'Error, please try later.'
+        format.json {render :json => {:error => 'Error, please try later.'}}
       end
     end
   end
