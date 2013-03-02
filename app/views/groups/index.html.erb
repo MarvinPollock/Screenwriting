@@ -1,13 +1,12 @@
-<h1>Listing groups</h1>
+<h1>Gruppen</h1>
 
 <table class="table table-bordered table-hover ui-widget ui-widget-content">
 <thead>
   <tr class="ui-widget-header">
-    <th>Group name</th>
-    <th>Group</th>
-    <th>User</th>
-    <th>Projects</th>
-    <!-- <th></th> -->
+    <th>Gruppenname</th>
+    <th>Gruppe</th>
+    <th>Benutzer</th>
+    <th>Projekte</th>
   </tr>
 </thead>
 </tbody>
@@ -29,16 +28,18 @@
 </table>
 
 <br />
-<button class="btn" onclick="groupAnlegen()" type="submit">New Group</button>
+<div class="btn-center">
+    <button class="btn-large" onclick="groupAnlegen()" type="submit">Neue Gruppe</button>
+</div>
 
 <div class="ui-widget" id="dialog-group" title="Create a group">
   <p class="group_error" style="color: red;"></p>
   <p class="group_tips" style="color: blue;"></p>
   <form>
     <fieldset>
-      <label for="group_name">Group name:</label>
+      <label for="group_name">Gruppenname:</label>
       <input type="text" id="group_name" />
-      <label for="group_number">Group number:</label>
+      <label for="group_number">Gruppennummer:</label>
       <input type="text" id="group_number" />
     </fieldset>
   </form>

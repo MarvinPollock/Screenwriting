@@ -30,7 +30,9 @@
                 } 
                 if !gefunden
              %>
-             <button class="btn" id="center-button" onclick="einladen('<%=current_user.first_name%>', '<%=user.first_name%>')">Einladen</button>
+             <div class="btn-center">
+                <button class="btn" id="center-button" onclick="einladen('<%=current_user.first_name%>', '<%=user.first_name%>')">Einladen</button>
+             </div>
           <%
                 end
             end

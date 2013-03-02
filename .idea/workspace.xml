@@ -5,18 +5,18 @@
     <ignored path="CoBook.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/20130219165357_create_users.rb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361362983551" ignored="false" />
-    <file path="/index.html.erb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1362239291207" ignored="false" />
+    <file path="/index.html.erb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1362240450368" ignored="false" />
     <file path="/user.rb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361442390907" ignored="false" />
     <file path="/add_identifierUrl_to_users.rb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361362789782" ignored="false" />
     <file path="/sessions_controller.rb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1362059263398" ignored="false" />
     <file path="/show.html.erb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1362066895651" ignored="false" />
     <file path="/_form.html.erb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361984123863" ignored="false" />
     <file path="/routes.rb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1362063847681" ignored="false" />
-    <file path="/custom.css.scss" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1362239385544" ignored="false" />
+    <file path="/custom.css.scss" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1362239697283" ignored="false" />
     <file path="/20130220122934_create_users.rb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361644372852" ignored="false" />
     <file path="/20130220142858_changelastname_to_last_name.rb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361375504724" ignored="false" />
     <file path="/users_controller.rb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361531418140" ignored="false" />
-    <file path="/application.html.erb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1362070005042" ignored="false" />
+    <file path="/application.html.erb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1362240488935" ignored="false" />
     <file path="/20130220162922_add_structure_to_d_bs.rb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361378228633" ignored="false" />
     <file path="/README.rdoc" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1362235857566" ignored="false" />
     <file path="/20130220165532_change_changed_to_changed_date.rb" changelist="69022cea-8311-4b35-8775-e24555c51691" time="1361379538041" ignored="false" />
@@ -77,8 +77,19 @@
       <file leaf-file-name="application.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="13" selection-start="486" selection-end="486" vertical-scroll-proportion="-2.6153846">
+            <state line="43" column="44" selection-start="1710" selection-end="1710" vertical-scroll-proportion="-5.230769">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html.erb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/help/index.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="40" column="6" selection-start="1149" selection-end="1149" vertical-scroll-proportion="0.57322174">
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#verbatim#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -95,10 +106,22 @@
       <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/projects/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="27" selection-end="147" vertical-scroll-proportion="-1.3076923">
+            <state line="0" column="12" selection-start="12" selection-end="12" vertical-scroll-proportion="-0.0">
               <folding>
-                <element signature="n#style#0;n#p#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#1;n#div#1;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/groups/index.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="4" selection-start="4" selection-end="4" vertical-scroll-proportion="-0.0">
+              <folding>
+                <element signature="n#style#0;n#p#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#1;n#div#1;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -107,16 +130,16 @@
       <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/users/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="65" selection-start="1122" selection-end="1122" vertical-scroll-proportion="-3.9230769">
+            <state line="34" column="19" selection-start="1034" selection-end="1034" vertical-scroll-proportion="-8.5">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="custom.css.scss" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="custom.css.scss" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/custom.css.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="109" column="19" selection-start="2395" selection-end="2395" vertical-scroll-proportion="0.23018868">
+            <state line="126" column="1" selection-start="2749" selection-end="2749" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -159,22 +182,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/controllers/projects_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/layouts/story.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/sessions_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/sessions/sign_in.html.erb" />
         <option value="$PROJECT_DIR$/app/views/messages/index.html.erb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/controllers/groups_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/groups/index.html.erb" />
         <option value="$PROJECT_DIR$/app/views/projects/_scenario.html.erb" />
         <option value="$PROJECT_DIR$/app/views/projects/show.html.erb" />
         <option value="$PROJECT_DIR$/app/views/layouts/login.html.erb" />
         <option value="$PROJECT_DIR$/README.rdoc" />
-        <option value="$PROJECT_DIR$/app/views/projects/index.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/views/users/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/projects/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/groups/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/custom.css.scss" />
+        <option value="$PROJECT_DIR$/app/views/help/index.html.erb" />
       </list>
     </option>
   </component>
@@ -253,10 +276,6 @@
               <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="users" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -275,6 +294,10 @@
               <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="help" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -287,6 +310,46 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoBook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoBook3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stylesheets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoBook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoBook3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -310,6 +373,7 @@
       <recent name="D:\Rails\AWE\CoBook\db\migrate" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Rails\AWE\CoBook3\app\views\help" />
       <recent name="D:\Rails\AWE\CoBook\app\assets\images" />
       <recent name="D:\Rails\AWE\CoBook\public" />
       <recent name="D:\Rails\AWE\CoBook\app\assets" />
@@ -739,11 +803,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/messages/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="6" selection-start="773" selection-end="773" vertical-scroll-proportion="-7.8461537" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="38" column="35" selection-start="745" selection-end="745" vertical-scroll-proportion="0.8947368">
@@ -760,19 +819,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/groups_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="33" selection-start="948" selection-end="948" vertical-scroll-proportion="2.2526317" />
+        <state line="49" column="33" selection-start="948" selection-end="948" vertical-scroll-proportion="2.2526317">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/groups/_form.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/groups/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="21" selection-start="216" selection-end="216" vertical-scroll-proportion="-2.7307692">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/projects/_scenario.html.erb">
@@ -815,34 +869,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/users/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="19" selection-start="1034" selection-end="1034" vertical-scroll-proportion="-8.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/projects/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="27" selection-end="147" vertical-scroll-proportion="-1.3076923">
+        <state line="0" column="12" selection-start="12" selection-end="12" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="n#style#0;n#p#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#1;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/groups/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="4" selection-start="4" selection-end="4" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#style#0;n#p#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#1;n#div#1;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="13" selection-start="486" selection-end="486" vertical-scroll-proportion="-2.6153846">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/users/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="65" selection-start="1122" selection-end="1122" vertical-scroll-proportion="-3.9230769">
+        <state line="43" column="44" selection-start="1710" selection-end="1710" vertical-scroll-proportion="-5.230769">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/custom.css.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="19" selection-start="2395" selection-end="2395" vertical-scroll-proportion="0.23018868">
+        <state line="126" column="1" selection-start="2749" selection-end="2749" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/help/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="6" selection-start="1149" selection-end="1149" vertical-scroll-proportion="0.57322174">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#verbatim#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
