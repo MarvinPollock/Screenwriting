@@ -1,1 +1,5 @@
 == Welcome to CoBook
+
+= Server Requirements
+* MySQL
+* Ehterpad
