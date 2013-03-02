@@ -13,6 +13,10 @@ gem 'cancan'
 gem "faker", "~> 1.0", :group => [:test, :development]
 gem 'carrierwave'
 
+group :test, :development do
+  gem "rspec-rails"
+end
+
 
 group :development do
   gem 'mysql2'
