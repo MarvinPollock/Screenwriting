@@ -1,6 +1,7 @@
 <h1>Listing groups</h1>
 
 <table class="table table-bordered table-hover ui-widget ui-widget-content">
+<thead>
   <tr class="ui-widget-header">
     <th>Group name</th>
     <th>Group</th>
@@ -8,7 +9,8 @@
     <th>Projects</th>
     <!-- <th></th> -->
   </tr>
-
+</thead>
+</tbody>
 <% @groups.each do |group| %>
   <tr>
     <td><%= group.status %></td>
@@ -23,17 +25,18 @@
     </td>
   </tr>
 <% end %>
+</tbody>
 </table>
 
 <br />
-<button class="btn" onclick="anlegen()" type="submit">New Group</button>
+<button class="btn" onclick="groupAnlegen()" type="submit">New Group</button>
 
-<div class="ui-widget" id="dialog-project" title="Create a group">
-  <p class="pro_error"></p>
-  <p class="validateTips"></p>
+<div class="ui-widget" id="dialog-group" title="Create a group">
+  <p class="group_error" style="color: red;"></p>
+  <p class="group_tips" style="color: blue;"></p>
   <form>
     <fieldset>
-      <label for="proj_name">Group name:</label>
+      <label for="group_name">Group name:</label>
       <input type="text" id="group_name" />
       <label for="group_number">Group number:</label>
       <input type="text" id="group_number" />
@@ -41,36 +44,25 @@
   </form>
 </div>
 
-<div class="ui-widget" id="warnung">You must belong to a group in order to create a project</div>
+
+<div id="popup"></div>
+
+<div class="ui-widget" id="group_warnung"></div>
 
 <br />
 <script>
-    function anlegen(){ // current, user
-        $.ajax({
-            type: "GET",
-            url:  "/user/groups",
-            dataType: "json",
-            success: function(result){
-                if (result.length > 0) {
-                    $("#dialog-project").dialog("open");
-                } else {
-                    $("#warnung").dialog("open");
-                }
-            },
-            error: function(xhr, status, err){
-                alert(err);
-            }
-        });
+    function groupAnlegen(){ // current, user
+        $("#dialog-group").dialog("open");
     }
 
     (function($){
         $.widget( "ui.combobox", {
             _create: function() {
-                $('#dialog-project').hide();
+                $('#dialog-group').hide();
                 var select = this.element,
                         selected = select.children(":selected"),
-                        tips = $(".validateTips"),
-                        errorTips = $(".error"),
+                        tips = $(".group_tips"),
+                        errorTips = $(".group_error"),
                         value = selected.val() ? selected.text() : "";
 
                 function updateTips(tips){
@@ -80,7 +72,7 @@
                     }, 500);
                 }
 
-                $("#warnung").dialog({
+                $("#group_warnung").dialog({
                     autoOpen: false,
                     height: 300,
                     width: 300,
@@ -92,7 +84,7 @@
                     }
                 });
 
-                $("#dialog-project").dialog({
+                $("#dialog-group").dialog({
                     autoOpen: false,
                     height: 300,
                     width: 350,
@@ -103,8 +95,8 @@
                                 updateTips(tips);
                                 return;
                             }else{
-                                var that = this;
                                 var data = JSON.stringify({gName: $('#group_name').val(), gNumber:  $('#group_number').val()});
+                                var that = this;
                                 $.ajax({
                                     type: "POST",
                                     url:  '/groups/create',
@@ -113,16 +105,28 @@
                                     data: data,
                                     success: function(result){
                                         $(that).dialog("close");
+                                        var but = $("<button>", {id: "but"});
+                                        $(that).append(but);
+                                        but.click(function(){location.reload()});
+                                        $("#but").click();
+                                        $(that).remove(but);
+                                        $('#group_name').val("");
                                     },
                                     error: function(xhr, status, err){
-                                        $(".error").html(err);
+                                        $(".group_error").html(err);
                                         updateTips(errorTips)
                                     }
                                 });
                             }
                         },
                         Cancel: function(){
-                            $(this).dialog("close");
+                          $("#dialog-group").dialog("close");
+                          var but = $("<button>", {id: "but"});
+                          $("#dialog-group").append(but);
+                          but.click(function(){location.reload()});
+                          $("#but").click();
+                          $("#dialog-group").remove(but);
+                          $('#group_name').val("");
                         }
                     }
                 });

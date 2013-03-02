@@ -3,26 +3,27 @@ class PadsController < ApplicationController
   load_and_authorize_resource
   # GET /pads
   # GET /pads.json
-  def index
-    @pads = Pad.all
-    @frames = Frame.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @pads }
-    end
-  end
+  # def index
+    # @pads = Pad.all
+    # @frames = Frame.all
+# 
+    # respond_to do |format|
+      # format.html # index.html.erb
+      # format.json { render json: @pads }
+    # end
+  # end
 
   # GET /pads/1
   # GET /pads/1.json
-  def show
-    @pad = Pad.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @pad }
-    end
-  end
+  # def show
+    # @pad = Pad.find(params[:id])
+# 
+    # respond_to do |format|
+      # set_current_pad(@pad)
+      # format.html # show.html.erb
+      # format.json { render json: @pad }
+    # end
+  # end
 
   # GET /pads/new
   # GET /pads/new.json
@@ -51,8 +52,12 @@ class PadsController < ApplicationController
   # POST /pads
   # POST /pads.json
   def create
-    @pad = Pad.new(params[:pad])
+    @pad = Pad.new
+    @pad.p_name = params[:pName]
     @project = Project.find(:first, :conditions => ["name=?", @pad.p_name])
+    @pad.title = params[:pTitle]
+    @pad.pad_url = generate_password(length=6)
+
 
     respond_to do |format|
       if @project

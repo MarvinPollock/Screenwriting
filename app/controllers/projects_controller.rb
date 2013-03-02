@@ -19,10 +19,11 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @pads = Pad.find_all_by_p_name(@project.name)
-    @frames = Frame.find_all_by_p_name(@project.name)
+    #@frames = Frame.find_all_by_p_name(@project.name)
     respond_to do |format|
+      set_current_project(@project)
       format.html # show.html.erb
-      format.json { render json: @project }
+      format.json { render :json => @project }
     end
   end
 
@@ -46,6 +47,7 @@ class ProjectsController < ApplicationController
     #@frames = Frame.find_all_by_p_name(@project.name)
 
     if gefunden
+      set_current_pad(@pad)
       @frames = @pad.frames
       respond_with(@frames, :location => nil)
     else

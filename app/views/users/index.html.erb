@@ -1,58 +1,168 @@
 <h1>Listing users</h1>
 
-<table class="table table-bordered table-hover ui-widget ui-widget-content">
-  <tr class="ui-widget-header">
+<div class="tablescroll">
+<table id="thetable2" cellspacing="0"> <!-- table table-bordered table-hover ui-widget ui-widget-content -->
+<thead>    
+  <tr> <!--ui-widget-header-->
     <th>First name</th>
     <th>Lastname</th>
-    <th>Group</th>
-    <th>Role</th>
-    <th>Identifier url</th>
+    <th>Email</th>
+    <!--<th>Role</th>
+    <th>Identifier url</th>-->
     <th></th>
     <th></th>
     <th></th>
-    <!-- <th></th> -->
   </tr>
-
+</thead>
+<tbody>
 <% @users.each do |user| %>
   <tr>
-    <td><%= link_to user.first_name, user %></td>
+    <td><%= user.first_name %></td>
     <td><%= user.last_name %></td>
-    <td>
-        <% user.group_ids.each { |id| %>
-        <%= link_to id, "/groups/#{id}" %>
-        <%}%>
-    </td><!--"/message/create?sender=#{current_user.first_name}&receiver=#{user.first_name}&object=Invitation"-->
-    <td><%= user.role%></td>
-    <td><%= user.identifier_url %></td>
+    <td><%= user.email%></td>
+    <!--<td><%= user.role%></td>
+    <td><%= user.identifier_url %></td>-->
     <td>
         <% unless current_user.groups.empty?%>
-          <%if !user.equals(current_user) && user.groups.empty?%>
-            <button class="btn" id="center-button" onclick="einladen('<%=current_user.first_name%>', '<%=user.first_name%>')">Einladen</button>
-          <%end%>
-        <%end%>
+          <%if !user.equals(current_user)%>
+             <%
+                gefunden = false;
+                current_user.groups.each { |g|
+                    gefunden ||= g.users.exists?(user)
+                } 
+                if !gefunden
+             %>
+             <button class="btn" id="center-button" onclick="einladen('<%=current_user.first_name%>', '<%=user.first_name%>')">Einladen</button>
+          <%
+                end
+            end
+          end
+        %>
     </td>
-    <div class="einladen"></div>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <!-- <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+    <!--<td><%= link_to 'Show', user %></td>
+    <td><%= link_to 'Edit', edit_user_path(user) %></td>-->
   </tr>
 <% end %>
+</tbody>
+<tfoot>    
+  <tr>
+    <th>First name</th>
+    <th>Lastname</th>
+    <th>Email</th>
+    <!---<th>Role</th>
+    <th>Identifier url</th>
+    <th></th>
+    <th></th>-->
+    <th></th>
+  </tr>
+</tfoot>
 </table>
-
-<div class="ui-widget" id="dialog-group" title="Select a group">
+</div>
+<div class="einladen"></div>
+<div class="ui-widget" id="dialog-user" title="Select a group">
     <p class="user_error"></p>
     <p class="user_tips">You have to select a group</p>
     <form>
         <fieldset>
-            <label for="combobox"></label>
-            <select id="combobox">
-                 
-            </select>
+            <label for="user_combo"></label>
+            <select id="user_combo"></select>
         </fieldset>
     </form>    
 </div>
 
 <br />
 <script>
-$("#combobox").combobox();  
+
+function einladen(current, user){ 
+    $.ajax({
+        type: "GET",
+        url:  "/user/groups",
+        dataType: "json",
+        success: function(result){
+            if(result.length > 0){
+                for(var i=0; i<result.length; i++){
+                    $('select').append($('<option>', {
+                        value: result[i].id,
+                        text: ''+result[i].id
+                    }));
+                }
+                var data = {sender: current, receiver: user};
+                $("#dialog-user").data("data", data).dialog("open");
+            } else{
+                alert("Empty group");
+            }
+        },
+        error: function(xhr, status, err){
+            alert(err);
+        }
+    });
+}
+
+(function($){
+    $.widget( "ui.combobox", {
+        _create: function() {
+            $('#dialog-user').hide();
+            var select = this.element,
+            selected = select.children(":selected"),
+            value = selected.val() ? selected.text() : "";
+
+            function updateTips(tips){
+                tips.addClass("ui-state-highlight");
+                setTimeout(function(){
+                    tips.removeClass("ui-state-highlight", 1500);
+                }, 500);
+            }
+//___________________________________________________________
+//             USER-EINLADEN-POP-UP
+//___________________________________________________________
+
+            $("#dialog-user").dialog({
+                autoOpen: false,
+                height: 300,
+                width: 350,
+                modal: true,
+                buttons: {
+                    "Ok": function(){
+                        if(selected.val() == ""){
+                            $("user_tips").html("You must belong to a group in order to create a project");
+                            updateTips($("user_tips"));
+                            return;
+                        }else{
+                            var that = this;
+                            var data = $("#dialog-user").data("data");
+                            var sender = data.sender;
+                            var receiver = data.receiver;
+                            var buf = JSON.stringify({sender: sender, receiver: receiver, groupId: $("#user_combo").val(), object: "Invitation"});
+                            var dataToSend = buf;
+                            $.ajax({
+                                type: "POST",
+                                url:  "/message/create",
+                                contentType: "application/json",
+                                dataType: "json",
+                                data: dataToSend,
+                                success: function(result){
+                                    $(that).dialog("close");
+                                },
+                                error: function(xhr, status, err){
+                                    $(".user_error").html(err);
+                                    updateTips($(".user_error"));
+                                }
+                            });
+                        }
+                    },
+                    Cancel: function(){
+                        $(this).dialog("close");
+                    }
+                }
+            });         
+            
+//___________________________________________________________
+            
+        },
+        _destroy: function() {
+            this.element.show();
+        }
+    });
+})(jQuery);
+$("#user_combo").combobox();  
 </script>

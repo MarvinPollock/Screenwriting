@@ -21,16 +21,56 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12" style="border-style:solid;border-width:1px;height: 400px;">
-      <iframe name="pad-frame" src="http://piratepad.net/<%= params[:pad_url] %>?fullScreen=1" style="width:100%;height: 100%;"></iframe>
+      <% if params[:pad_url] == nil%>
+      <iframe name="pad-frame" src="http://localhost:9001" style="width:100%;height: 100%;"></iframe>
+      <% else %>
+      <iframe name="pad-frame" src="http://localhost:9001/p/<%= params[:pad_url] %>?fullScreen=1" style="width:100%;height: 100%;"></iframe>
+      <% end %>
     </div>
   </div>
 </div>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<div class="ui-widget" id="dialog-project" title="Create a pad">
+  <p class="pro_error"></p>
+  <p class="validateTips"></p>
+  <form>
+    <fieldset>
+      <label for="pad_title">Pad Title:</label>
+      <input type="text" id="pad_title" />
+    </fieldset>
+  </form>
+</div>
+
+<div class="ui-widget" id="dialog-project2" title="Create a frame">
+  <p class="pro_error"></p>
+  <p class="validateTips"></p>
+  <form>
+    <fieldset>
+      <label for="frame_title">Frame Title:</label>
+      <input type="text" id="frame_title" />
+      <label for="frame_image">Pad Title:</label>
+      <input id="frame_image" name="frame[image]" type="file">
+    </fieldset>
+  </form>
+</div>
+
+<div class="ui-widget" id="warnung">You must belong to a group in order to create a project</div>
+
+<div id="buffer"></div>
+
+<br />
 
 <script>
     function changeContent(pad){
+        /*
+         * Oben wurde ein Div-Element angelegt mit dem Id = buffer.
+         * Bei Ajax-Anfrage an den Server wollen wir das uebergebene
+         * 'pad' weiter verwenden koennen. Mit jQuery holen wir uns
+         * das Element, das als Buffer dient und speichern unser 'pad'
+         * darein, was wir dann in unserer success-function wieder
+         * abfragen koennen vom Buffer.
+         */
+        $("#buffer").data("pad", pad);
         $.ajax({
             type: "POST",
             url:  '/projects/loadFrames',
@@ -39,6 +79,9 @@
             success: function(result){
                 var thumbnails = 'thumbnails';
                 var framElem = $('#storyboard');
+                
+                // Abfragen des gespeicherten pads
+                
                 framElem.empty();
                 var ul = $('<ul>', {
                    id: 'story'
@@ -65,14 +108,18 @@
 
                     ul.append(li);
                 }
+                
                 var li2 = $('<li>').addClass('span1');
+                pad_id = $("#buffer").data("pad").id;
                 var a2 = $('<a>', {
-                    href: '/frames/new'
-                }).addClass(thumbnails);
+                    href: "/frames/new?pad_id="+pad_id}).addClass(thumbnails);
+                                      
                 var img2 = $('<img>', {
                     src: '<%= asset_path 'Plus_sign.png' %>'
                 });
+                
                 a2.append(img2).appendTo(li2);
+                
                 ul.append(li2);
             },
             error: function(err){
@@ -81,4 +128,92 @@
         });
     }
 
+    function anlegen(){ // current, user
+        $.ajax({
+            type: "GET",
+            url:  "/user/groups",
+            dataType: "json",
+            success: function(result){
+                if (result.length > 0) {
+                    $("#dialog-project").dialog("open");
+                } else {
+                    $("#warnung").dialog("open");
+                }
+            },
+            error: function(xhr, status, err){
+                alert(err);
+            }
+        });
+    }
+
+    (function($){
+        $.widget( "ui.combobox", {
+            _create: function() {
+                $('#dialog-project').hide();
+                var select = this.element,
+                        selected = select.children(":selected"),
+                        tips = $(".validateTips"),
+                        errorTips = $(".error"),
+                        value = selected.val() ? selected.text() : "";
+
+                function updateTips(tips){
+                    tips.addClass("ui-state-highlight");
+                    setTimeout(function(){
+                        tips.removeClass("ui-state-highlight", 1500);
+                    }, 500);
+                }
+
+                $("#warnung").dialog({
+                    autoOpen: false,
+                    height: 300,
+                    width: 300,
+                    modal: true,
+                    buttons: {
+                        "Ok": function(){
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+
+                $("#dialog-project").dialog({
+                    autoOpen: false,
+                    height: 300,
+                    width: 350,
+                    modal: true,
+                    buttons: {
+                        "Ok": function(){
+                            if(selected.val() == ""){
+                                updateTips(tips);
+                                return;
+                            }else{
+                                var that = this;
+                                var data = JSON.stringify({pTitle: $('#pad_title').val(), pName: '<%= @project.name %>' });
+                                $.ajax({
+                                    type: "POST",
+                                    url:  '/pads/create',
+                                    contentType: "application/json",
+                                    dataType: "json",
+                                    data: data,
+                                    success: function(result){
+                                        $(that).dialog("close");
+                                    },
+                                    error: function(xhr, status, err){
+                                        $(".error").html(err);
+                                        updateTips(errorTips)
+                                    }
+                                });
+                            }
+                        },
+                        Cancel: function(){
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            },
+            _destroy: function() {
+                this.element.show();
+            }
+        });
+    })(jQuery);
+    $("#pad_title").combobox();
 </script>

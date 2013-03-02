@@ -49,13 +49,15 @@ class GroupsController < ApplicationController
     @group.num = params[:gNumber]
     @group.status = params[:gName]
     respond_to do |format|
-      if g = Group.find(:first, :conditions => ["num = ?", params[:num]])
+      if g = Group.find(:first, :conditions => ["num = ?", params[:gNumber]])
         flash[:notice] = "Die Gruppe mit der Nummer #{@group.num}  existiert bereits."
         format.html { render action: "new"}
         format.json { render json: @group.errors }
       else
         if @group.save
-          @group.users << current_user
+          unless @group.users.exists?(current_user)
+            @group.users << current_user
+          end
           format.html { redirect_to @group, notice: 'Group was successfully created.' }
           format.json { render json: @group, status: :created, location: @group }
         else

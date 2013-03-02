@@ -49,12 +49,11 @@ class FramesController < ApplicationController
   # POST /frames
   # POST /frames.json
   def create
-    @pad = Pad.find(:first, :conditions => ["id=?", params[:frame][:pad_id]])
+    @pad = Pad.find(:first, :conditions => ["id=?", params[:pad_id]])
     @frame = Frame.new
-    @frame.name = params[:frame][:name]
-    @frame.pad_id = params[:frame][:pad_id]
-    @frame.descr = params[:frame][:descr]
-    @frame.image = params[:frame][:image]
+    @frame.p_name = params[:pTitle]
+    @frame.pad_url = params[:pad_url]
+    @frame.image = params[:image]
     respond_to do |format|
       @pad.frames << @frame
       format.html { redirect_to @frame, notice: 'Frame was successfully created.' }

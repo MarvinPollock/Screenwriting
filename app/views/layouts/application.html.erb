@@ -42,7 +42,6 @@
    </style>
 </head>
 <body>
-
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
@@ -55,25 +54,15 @@
           </a>
 
           <!-- Be sure to leave the brand out there if you want it shown -->
-          <a class="brand" href="/">CoBook</a>
+          <a class="brand" href="">CoBook</a>
 
           <!-- Everything you want hidden at 940px or less, place within here -->
           <div class="nav-collapse collapse">
             <nav>
               <ul class="nav pull-right">
                   <li><%= link_to "Home", '/' %></li>
-                  <li>
-                      <%= link_to "Projects", '/projects/' %>
-                      <ul>
-                          <li onclick="projectAnlegen()"><a href="">New project</a></li>
-                      </ul>
-                  </li>
-                  <li>
-                      <%= link_to "Groups", '/groups/' %>
-                      <ul>
-                          <li onclick="groupAnlegen()"><a href="">New group</a></li>
-                      </ul>
-                  </li>
+                  <li><%= link_to "Projects", '/projects/' %></li>
+                  <li><%= link_to "Groups", '/groups/' %></li>
                   <li><%= link_to "Users",    '/users/' %></li>
                   <li><%= link_to "Messages",    '/messages/' %></li>
                   <li><%= link_to "Help",    '/help/' %></li>
@@ -89,11 +78,16 @@
 </header>
 <div class="container">
 
+<%unless notice.nil?%>
+<p class="notice"><%= notice %></p>
+<%end%>
+<%unless alert.nil?%>
+<p class="alert"><%= alert %></p>
+<%end%>
+
   <%= yield %>
 
 
 </div>
-
-<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 </body>
 </html>

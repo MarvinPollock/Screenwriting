@@ -1,11 +1,8 @@
 class MessagesController < ApplicationController
   respond_to :html, :json, :js
+  skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
   def index
     @messages = Message.where(:receiver => current_user.first_name)
-  end
-  
-  def new
-    
   end
   
   def create
@@ -17,18 +14,29 @@ class MessagesController < ApplicationController
     @msg.sender = sender
     @msg.receiver = receiver
     @msg.object = object
-    #respond_with do |format|
+    respond_with do |format|
        if object == "Invitation"
-         @msg.content = "/message/antwort?sender=#{sender}&groupId=#{groupId}"
-         if @msg.save
-            render :text => "OK"
+         aMsgs = Message.all
+         gefunden = false
+         aMsgs.each { |m|
+           gefunden ||= m.sender == sender && m.receiver == receiver && m.object == "Invitation"
+         }
+         
+         if gefunden
+            format.json{render :json => {:success => "OK"}}
          else
-           render :text => @msg.errors.full_messages
+            @msg.content = "/message/antwort?sender=#{sender}&groupId=#{groupId}"
+            if @msg.save
+                format.json{render :json => {:success => "OK"}}
+            else
+              format.json{render :json => {:error => @msg.errors.full_messages}}
+            end
          end
+         
        else
-         render :text => "Object stimmt nicht"
+         format.json{render :json => {:error => "Object stimmt nicht"}}
        end
-    #end
+    end
     
   end
   

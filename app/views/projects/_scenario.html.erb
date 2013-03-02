@@ -1,9 +1,10 @@
 <div class="tabbable"> <!-- Only required for left/right tabs -->
   <ul class="nav nav-tabs">
     <% @pads.each do |p| %>
-        <li class="active"><a href="http://piratepad.net/<%= p.pad_url %>?fullScreen=1" target="pad-frame" data-toggle="tab" onclick="changeContent(<%= p.to_json %>)">Pad</a></li>
+        <% @link = "http://localhost:9001/p/#{p.pad_url}?fullScreen=1"%>
+        <li class="active"><a href="<%=@link%>" target="pad-frame" data-toggle="tab" onclick="changeContent(<%= p.to_json %>)"> <%= p.title %> </a></li>
     <% end %>
-        <li><a href="/pads/new?name=<%= @project.name %>"><img src="<%= asset_path 'Plus_sign.png' %>" width="10px" /> New Pad</a></li>
+        <li><a href="#" onclick="anlegen()"><img src="<%= asset_path 'Plus_sign.png' %>" width="10px" /> New Pad</a></li>
   </ul>
 </div>
 

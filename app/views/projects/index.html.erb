@@ -1,6 +1,7 @@
 <h1>Listing projects</h1>
 
 <table class="table table-bordered table-hover ui-widget ui-widget-content">
+<thead>    
   <tr class="ui-widget-header">
     <th>Name</th>
     <th>Group</th>
@@ -10,11 +11,12 @@
     <th></th>
     <!-- <th></th> -->
   </tr>
-
+</thead>
+<tbody>
 <% @projects.each do |project| %>
   <tr >
     <td><%= project.name %></td>
-    <td><%= link_to project.group_id, project.group %></td>
+    <td><%= link_to project.group.num, project.group %></td>
     <td><%= project.created %></td>
     <td><%= project.changed_date %></td>
     <td><%= link_to 'Show', project %></td>
@@ -22,124 +24,138 @@
     <!-- <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
   </tr>
 <% end %>
+</tbody>
 </table>
 
 <br />
 
-<form method="get" action="<%= new_project_path %>">
-
-</form>
-<button class="btn" onclick="projectAnlegen()" type="submit">New Project</button>
+<button class="btn" onclick="projectAnlegen()">New Project</button>
 
 <div class="ui-widget" id="dialog-project" title="Create a project">
-  <p class="proj_error"></p>
-  <p class="proj_tips"></p>
+  <p class="proj_error" style="color: red;"></p>
+  <p class="proj_tips" style="color: blue;"></p>
   <form>
     <fieldset>
       <label for="proj_name">Project name:</label>
       <input type="text" id="proj_name" />
-      <label for="group_number">Group number:</label>
-      <select id="group_number" ></select>
+      <label for="project_group_number">Group number:</label>
+      <select id="project_group_number" ></select>
     </fieldset>
   </form>
 </div>
 
-<div class="ui-widget proj_warnung">You must belong to a group in order to create a project</div>
+<div class="ui-widget" id="proj_warnung"></div>
 
 <br />
 <script>
-    function anlegen(){ // current, user
-        $.ajax({
-            type: "GET",
-            url:  "/user/groups",
-            dataType: "json",
-            success: function(result){
-                if (result.length > 0) {
-                    for (var i = 0; i < result.length; i++) {
-                        $('select').append($('<option>', {
-                            value: result[i].num,
-                            text: '' + result[i].num
-                        }));
-                    }
+function projectAnlegen(){ 
+    $.ajax({
+        type: "GET",
+        url:  "/user/groups",
+        dataType: "json",
+        success: function(result){
+            if(result.length > 0){
+                for (var i = 0; i < result.length; i++) {
+                    $('select').append($('<option>', {
+                        value: result[i].num,
+                        text: '' + result[i].num
+                    }));
+                }
                 $("#dialog-project").dialog("open");
-                } else {
-                    $("#warnung").dialog("open");
-                }
-            },
-            error: function(xhr, status, err){
-                alert(err);
+            }else {
+                $("#proj_warnung").html("You must belong to a group in order to create a project").dialog("open");
             }
-        });
-    }
-
+        },
+        error: function(xhr, status, err){
+            alert(err);
+        }
+    });
+}
     (function($){
-        $.widget( "ui.combobox", {
-            _create: function() {
-                $('#dialog-project').hide();
-                var select = this.element,
-                        selected = select.children(":selected"),
-                        tips = $(".validateTips"),
-                        errorTips = $(".error"),
-                        value = selected.val() ? selected.text() : "";
-
-                function updateTips(tips){
-                    tips.addClass("ui-state-highlight");
-                    setTimeout(function(){
-                        tips.removeClass("ui-state-highlight", 1500);
-                    }, 500);
-                }
-
-                $("#warnung").dialog({
-                    autoOpen: false,
-                    height: 300,
-                    width: 300,
-                    modal: true,
-                    buttons: {
-                           "Ok": function(){
-                                $(this).dialog("close");
-                           }
-                    }
-                });
-
-                $("#dialog-project").dialog({
-                    autoOpen: false,
-                    height: 300,
-                    width: 350,
-                    modal: true,
-                    buttons: {
-                        "Ok": function(){
-                            if(selected.val() == ""){
-                                updateTips(tips);
-                                return;
-                            }else{
-                                var that = this;
-                                var data = JSON.stringify({pName: $('#proj_name').val(), gNumber:  $('#group_number').val()});
-                                $.ajax({
-                                    type: "POST",
-                                    url:  '/projects/create',
-                                    contentType: "application/json",
-                                    dataType: "json",
-                                    data: data,
-                                    success: function(result){
-                                        $(that).dialog("close");
-                                    },
-                                    error: function(xhr, status, err){
-                                        $(".error").html(err);
-                                        updateTips(errorTips)
-                                    }
-                                });
-                            }
-                        },
-                        Cancel: function(){
-                            $(this).dialog("close");
-                        }
-                    }
-                });
-            },
-            _destroy: function() {
-                this.element.show();
+    $.widget( "ui.combobox", {
+        _create: function() {
+            $('#dialog-project').hide();
+            var select = this.element,
+            selected = select.children(":selected"),
+            value = selected.val() ? selected.text() : "";
+            function updateTips(tips){
+                tips.addClass("ui-state-highlight");
+                setTimeout(function(){
+                    tips.removeClass("ui-state-highlight", 1500);
+                }, 500);
             }
-        });
-    })(jQuery);
-    $("#group_number").combobox();
+
+            $('#proj_warnung').dialog({
+                autoOpen: false,
+                height: 300,
+                width: 300,
+                modal: true,
+                buttons: {
+                    "Ok": function(){
+                        $(this).html("").dialog("close");
+                    }
+                }
+            });
+            
+//___________________________________________________________
+//          PROJEKT-ANLEGEN-POP-UP
+//___________________________________________________________
+            
+            $('#dialog-project').dialog({
+                autoOpen: false,
+                height: 300,
+                width: 350,
+                modal: true,
+                buttons: {
+                    "Ok": function(){
+                        if(selected.val() == ""){
+                            updateTips(tips);
+                            return;
+                        }else{
+                            var that = this;
+                            data = JSON.stringify({ pName: $('#proj_name').val(), gNumber: $('#project_group_number').val() });
+                            $.ajax({
+                                type: "POST",
+                                url:  "/projects/create",
+                                contentType: "application/json",
+                                dataType: "json",
+                                data: data,
+                                success: function(result){
+                                    $(that).dialog("close");
+                                    var but = $("<button>", {id: "but"});
+                                    $(that).append(but);
+                                    but.click(function(){location.reload()});
+                                    $("#but").click();
+                                    $(that).remove(but);
+                                    $('#proj_name').val("");
+                                },
+                                error: function(xhr, status, err){
+                                    $(".proj_error").html(err);
+                                    updateTips($('.proj_error'));
+                                }
+                            });
+                        }  
+                    },
+                    Cancel: function(){
+                        $("#dialog-project").dialog("close");
+                          var but = $("<button>", {id: "but"});
+                          $("#dialog-project").append(but);
+                          but.click(function(){location.reload()});
+                          $("#but").click();
+                          $("#dialog-project").remove(but);
+                          $('#proj_name').val("");
+                    }
+                }
+            });
+            
+//___________________________________________________________
+
+            
+        },
+        _destroy: function() {
+            this.element.show();
+        }
+    });
+})(jQuery);
+$('#project_group_number').combobox();
 </script>
