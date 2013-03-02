@@ -1,16 +1,14 @@
 <h1>Listing users</h1>
 
-<div class="tablescroll">
-<table id="thetable2" cellspacing="0"> <!-- table table-bordered table-hover ui-widget ui-widget-content -->
-<thead>    
-  <tr> <!--ui-widget-header-->
+<table class="table table-bordered table-hover ui-widget ui-widget-content">
+  <thead>
+  <tr class="ui-widget-header">
     <th>First name</th>
     <th>Lastname</th>
     <th>Email</th>
     <!--<th>Role</th>
     <th>Identifier url</th>-->
-    <th></th>
-    <th></th>
+
     <th></th>
   </tr>
 </thead>
@@ -39,8 +37,7 @@
           end
         %>
     </td>
-    <!--<td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>-->
+    <!-- <td><%= link_to 'Edit', edit_user_path(user) %></td>-->
   </tr>
 <% end %>
 </tbody>

@@ -3,10 +3,8 @@
 <table class="table table-bordered table-hover ui-widget ui-widget-content">
 <thead>    
   <tr class="ui-widget-header">
-    <th>Name</th>
-    <th>Group</th>
-    <th>Created</th>
-    <th>Changed</th>
+    <th>Projektname</th>
+    <th>Gruppe</th>
     <th></th>
     <th></th>
     <!-- <th></th> -->
@@ -17,11 +15,10 @@
   <tr >
     <td><%= project.name %></td>
     <td><%= link_to project.group.num, project.group %></td>
-    <td><%= project.created %></td>
-    <td><%= project.changed_date %></td>
-    <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <!-- <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+    <td><center><%= button_to "Projekt anzeigen", project,
+                      :class => "btn", :method => :get %></center></td>
+    <td><center><%= button_to "Projekt bearbeiten", edit_project_path(project),
+                      :class => "btn", :method => :get %></center></td>
   </tr>
 <% end %>
 </tbody>
